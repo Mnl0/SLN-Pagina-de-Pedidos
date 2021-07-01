@@ -1,0 +1,87 @@
+﻿@model Pagina_de_Pedidos.Models.Detalle
+@{
+    ViewBag.Title = "Editar";
+}
+<div class="text-center">
+    <h2 class="py-3">Editar Detalle</h2>
+</div>
+
+<div>
+    <form action="/Detalle/Editar" method="post">
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Id Detalle</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="id_detalle" id="id_detalle" value="@Model.Id_detalle" readonly />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Pedido : </label>
+            <div class="col-6">
+                @Html.DropDownList("Id_pedido", null, "Seleccione pedido", htmlAttributes: new { @class = "form-control m-2" })
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Producto:</label>
+            <div class="col-6">
+                @Html.DropDownList("Id_producto", null, "Seleccione producto", htmlAttributes: new { @class = "form-control m-2" })
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Cantidad</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2 numeros" type="text" name="cantidad" id="cantidad" value="@Model.Cantidad" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Precio</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2 numeros" type="text" name="precio" id="precio" value="@Model.Precio" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Descripcion</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="descripcion" id="descripcion" value="@Model.Descripcion" />
+            </div>
+        </div>
+        <div class="col-9 text-end">
+            <input class="btn btn-warning" type="submit" id="btnEditar" name="btnEditar" value="Editar" />
+            <a href="/Detalle/Index" class="btn btn-success">Cancelar</a>
+        </div>
+    </form>
+</div>
+<script>
+    $('#btnEditar').click(function (e) {
+        let error = '';
+        if (!$('#Id_pedido').val()) {
+            error += 'Debe seleccionar un pedido \n';
+        }
+        if (!$('#Id_producto').val()) {
+            error += 'Debe seleccionar un producto\n';
+        }
+        if ($('#cantidad').val().trim() == '') {
+            error += 'Debe ingresar una cantidad\n';
+        }
+        if ($('#precio').val().trim() == '') {
+            error += 'Debe ingresar precio\n';
+        }
+        if ($('#descripcion').val().trim() == '') {
+            error += 'Debe ingresar una descripcion\n';
+        }
+        if (error != '') {
+            swal('Verificar Datos Ingresados!!!', error, 'error');
+            e.preventDefault();
+        }
+    });
+    $('.numeros').on('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+</script>

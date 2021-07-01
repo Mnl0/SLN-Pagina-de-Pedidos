@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Crear";
+}
+<div class="text-center">
+    <h2 class="py-3">Crear Producto</h2>
+</div>
+<div>
+    <form method="post" action="/Producto/Crear">
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Categoría: </label>
+            <div class="col-6">
+                @Html.DropDownList("Id_categoria", null, "Seleccione categoría", htmlAttributes: new { @class = "form-control m-2" })
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Nombre: </label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="nombre" id="nombre" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Precio: </label>
+            <div class="col-6">
+                <input class="form-control m-2 numeros" type="text" name="Precio" id="Precio" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Descripcion: </label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="Descripcion" id="Descripcion" />
+            </div>
+        </div>
+        <div class="col-9 text-end">
+            <input class="btn btn-primary" type="submit" id="btnEnviar" value="Guardar" />
+            <a href="/Producto/Index" class="btn btn-success">Cancelar</a>
+        </div>
+    </form>
+</div>
+<script>
+    $('#btnEnviar').click(function (e) {
+        let error = '';
+        if (!$('#Id_categoria').val()) {
+            error = 'Debe seleccionar la categoría\n';
+        }
+        if ($('#nombre').val().trim() == '') {
+            error += 'Debe ingresar un nombre\n';
+        }
+        if ($('#Precio').val().trim() == '') {
+            error += 'Debe ingresar el precio\n';
+        }
+
+        if ($('#Descripcion').val().trim() == '') {
+            error += 'Debe ingresar una descripción \n';
+        }
+        if (error != '') {
+            swal('Verificar Datos Ingresados!!!', error, 'error');
+            e.preventDefault();
+        }
+    });
+    $('.numeros').on('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+</script>

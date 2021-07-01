@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Pagina_de_Pedidos.Models.Categoria>
+@{
+    ViewBag.Title = "Index";
+}
+<h2 class="text-center py-3">Lista de Categorias</h2>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="">Datos de categoría</i>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id_categoria</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.Descripcion</td>
+                        <td class="text-end">
+                            <a href="/Categoria/Editar/@item.Id_categoria" class="btn btn-warning">Editar</a>
+                            <a href="/Categoria/Eliminar/@item.Id_categoria" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a class="btn btn-success" href="/Categoria/Crear/">Crear categoria</a>
+    </div>
+</div>

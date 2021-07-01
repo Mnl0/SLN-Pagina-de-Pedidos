@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Crear";
+}
+<div class="text-center">
+    <h2 class="py-3">Crear Pedido</h2>
+</div>
+<div>
+    <form method="post" action="/Pedido/Crear">
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Cliente: </label>
+            <div class="col-6">
+                @Html.DropDownList("Id_cliente", null, "Seleccione al cliente", htmlAttributes: new { @class = "form-control m-2" })
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Fecha: </label>
+            <div class="col-6">
+                <input class="form-control m-2 numGuion" type="text" name="fecha" id="fecha" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Número pedido: </label>
+            <div class="col-6">
+                <input class="form-control m-2 numeros" type="text" name="numero_pedido" id="numero_pedido" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Precio: </label>
+            <div class="col-6">
+                <input class="form-control m-2 numeros" type="text" name="precio_total" id="precio_total" />
+            </div>
+        </div>
+        <div class="col-9 text-end">
+            <input class="btn btn-primary" type="submit" id="btnEnviar" value="Guardar" />
+            <a href="/Pedido/Index" class="btn btn-success">Cancelar</a>
+        </div>
+    </form>
+</div>
+<script>
+    $('#btnEnviar').click(function (e) {
+        let error = '';
+        if (!$('#Id_cliente').val()) {
+            error = 'Debe seleccionar un cliente\n';
+        }
+        if ($('#fecha').val().trim() == '') {
+            error += 'Debe ingresar una fecha\n';
+        }
+        if ($('#numero_pedido').val().trim() == '') {
+            error += 'Debe ingresar el número de pedido \n';
+        }
+        if ($('#precio_total').val().trim() == '') {
+            error += 'Debe ingresar el precio \n';
+        }
+        if (error != '') {
+            swal('Verificar Datos Ingresados!!!', error, 'error');
+            e.preventDefault();
+        }
+    });
+    $('.numeros').on('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+    $('.numGuion').on('input', function () {
+        this.value = this.value.replace(/[^0-9-]/g, '');
+    });
+</script>

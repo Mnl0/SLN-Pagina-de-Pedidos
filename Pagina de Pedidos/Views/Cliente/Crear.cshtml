@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Crear";
+}
+<div class="text-center">
+    <h2 class="py-3">Crear Cliente</h2>
+</div>
+<div>
+    <form method="post" action="/Cliente/Crear">
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Nombre: </label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="nombre" id="nombre" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Telefono: </label>
+            <div class="col-6">
+                <input class="form-control m-2 numeros" type="text" name="telefono" id="telefono" maxlength="9" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Direccion:</label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="direccion" id="direccion" />
+            </div>
+        </div>
+        <div class="col-9 text-end">
+            <input class="btn btn-primary" type="submit" id="btnEnviar" value="Guardar" />
+            <a href="/Cliente/Index" class="btn btn-success">Cancelar</a>
+        </div>
+    </form>
+</div>
+<script>
+    $('#btnEnviar').click(function (e) {
+        let error = '';
+        if ($('#nombre').val().trim() == '') {
+            error = 'Debe ingresar nombre del cliente \n';
+        }
+        if ($('#telefono').val().trim() == ''){
+            error += 'Debe ingresar un telefono del cliente \n';
+        }
+        if ($('#telefono').val().length != 9) {
+            error += 'El teléfono debe tener 9 dígitos \n';
+        }
+        if ($('#direccion').val().trim() == '') {
+            error += 'Debe ingresar una direccion del cliente \n';
+        }
+        if (error != '') {
+            swal('Verificar Datos Ingresados!!!', error, 'error');
+            e.preventDefault();
+        }
+    });
+    $('.numeros').on('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+</script>

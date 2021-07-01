@@ -1,0 +1,40 @@
+﻿@model Pagina_de_Pedidos.Models.Cliente
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<div class="text-center">
+    <h2 class="py-3">Eliminar Cliente</h2>
+</div>
+<div>
+    <form method="post" action="/Cliente/Eliminar">
+        <input type="hidden" name="id_cliente" value="@Model.Id_cliente" readonly />
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Nombre: </label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="nombre" value="@Model.Nombre" readonly />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Telefono:</label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="telefono" value="@Model.Telefono" readonly />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Direccion:</label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="direccion" value="@Model.Direccion" readonly />
+            </div>
+        </div>
+        <div class=" col-9 text-end">
+            <input class="btn btn-danger" type="submit" id="btnEliminar" value="Eliminar"/>
+            <a href="/Cliente/Index" class="btn btn-success">Cancelar</a>
+        </div>
+    </form>
+</div>
+<script>
+    $('#btnEliminar').click(function (e) {
+            alert('eliminado con exito');
+    });
+</script>

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Pagina_de_Pedidos.Models.Producto>
+@{
+    ViewBag.Title = "Index";
+}
+    <h2 class="text-center py-3">Lista de Productos</h2>
+
+<div class="card mb-4 mb-5 pb-3">
+    <div class="card-header">
+        <i class="">Datos de productos</i>
+    </div>
+    <div class="card-body">
+        <div class="form-group row">
+            <label class="col-1">Producto</label>
+            <div class="col-2">
+                @Html.DropDownList("Producto", null, "todos", htmlAttributes: new { @class = "form-control" })
+            </div>
+        <button class="btn btn-success" id="buscar">Buscar</button>
+        </div>
+        <a class="btn btn-success" href="/Producto/Crear/">Crear nuevo Producto</a>
+    </div>
+    <div class="card-footer">
+        <div class="table-responsive" id="tablaProductos">
+
+        </div>
+    </div>
+</div>
+<script>
+    $('#buscar').click(function ()){
+        //agrego una variable datos los agrega en el get
+        $.get('@Url.Action("listarProductos")' + '?producto =' + $('#productos').val(), function (productos) {
+            $('#tablaProductos').html.(productos);
+        });
+    }
+</script>

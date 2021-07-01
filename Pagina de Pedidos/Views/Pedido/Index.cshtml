@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Pagina_de_Pedidos.Models.Pedido>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center py-3">Lista de Pedidos</h2>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="">Datos de Pedidos</i>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id pedido</th>
+                    <th>Id cliente</th>
+                    <th>fecha</th>
+                    <th>precio total</th>
+                    <th>numero pedido</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id_pedido</td>
+                        <td>@item.Id_cliente</td>
+                        <td>@item.Fecha.ToShortDateString()</td>
+                        <td>@item.Precio_total</td>
+                        <td>@item.Numero_pedido</td>
+                        <td class="text-end">
+                            <a href="/Pedido/Editar/@item.Id_pedido" class="btn btn-warning">Editar</a>
+                            <a href="/Pedido/Eliminar/@item.Id_pedido" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a class="btn btn-success" href="/Pedido/Crear/">Crear nuevo pedido</a>
+    </div>
+</div>

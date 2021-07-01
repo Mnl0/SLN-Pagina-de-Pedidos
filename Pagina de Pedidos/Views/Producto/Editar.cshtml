@@ -1,0 +1,80 @@
+﻿@model Pagina_de_Pedidos.Models.Producto
+@{
+    ViewBag.Title = "Editar";
+}
+<div class="text-center">
+    <h2 class="py-3">Editar Producto</h2>
+</div>
+
+<div>
+    <form action="/Producto/Editar" method="post">
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Id Producto:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="id_producto" id="id_producto" value="@Model.Id_producto" readonly />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Categoría: </label>
+            <div class="col-6">
+                @Html.DropDownList("Id_categoria", null, "Seleccione categoría", htmlAttributes: new { @class = "form-control m-2" })
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Nombre:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="Nombre" id="Nombre" value="@Model.Nombre" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>precio:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2 numeros" type="text" name="Precio" id="Precio" value="@Model.Precio" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Descripcion:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="Descripcion" id="Descripcion" value="@Model.Descripcion" />
+            </div>
+        </div>
+        <div class="col-9 text-end">
+            <input class="btn btn-warning" type="submit" id="btnEditar" name="btnEditar" value="Editar"/>
+            <a href="/Producto/Index" class="btn btn-success">Cancelar</a>
+        </div>
+    </form>
+</div>
+<script>
+    $('#btnEditar').click(function (e) {
+        let error = '';
+        if (!$('#Id_categoria').val()) {
+            error = 'Debe seleccionar la categoría\n';
+        }
+        if ($('#Nombre').val().trim() == '') {
+            error += 'Debe ingresar un nombre\n';
+        }
+        if ($('#Precio').val().trim() == '') {
+            error += 'Debe ingresar el precio\n';
+        }
+
+        if ($('#Descripcion').val().trim() == '') {
+            error += 'Debe ingresar una descripción \n';
+        }
+        if (error != '') {
+            swal('Verificar Datos Ingresados!!!', error, 'error');
+            e.preventDefault();
+        }
+    });
+
+    $('.numeros').on('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+</script>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="310154e661b84979843fec96527768aa" Name="Diagram1">
+        <EntityTypeShape EntityType="PaginaPedidoModel.Categoria" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaginaPedidoModel.Cliente" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaginaPedidoModel.Detalle" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaginaPedidoModel.Pedido" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaginaPedidoModel.Producto" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaginaPedidoModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="PaginaPedidoModel.FK_Producto_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="PaginaPedidoModel.FK_Pedido_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="PaginaPedidoModel.FK_Detalle_Pedido" ManuallyRouted="false" />
+        <AssociationConnector Association="PaginaPedidoModel.FK_Detalle_Producto" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

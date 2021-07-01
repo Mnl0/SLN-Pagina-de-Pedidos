@@ -1,0 +1,81 @@
+﻿@model Pagina_de_Pedidos.Models.Pedido
+@{
+    ViewBag.Title = "Editar";
+}
+<div class="text-center">
+    <h2 class="py-3">Editar Pedido</h2>
+</div>
+
+<div>
+    <form action="/Pedido/Editar" method="post">
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Id Pedido:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="id_pedido" id="id_pedido" value="@Model.Id_pedido" readonly />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Cliente: </label>
+            <div class="col-6">
+                @Html.DropDownList("Id_cliente", null, "Seleccione cliente", htmlAttributes: new { @class = "form-control m-2" })
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>fecha:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2 numGuion" type="text" name="fecha" id="fecha" value="@Model.Fecha.ToShortDateString()" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>numero pedido:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2 numeros" type="text" name="numero_pedido" id="numero_pedido" value="@Model.Numero_pedido" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>precio total:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2 numeros" type="text" name="precio_total" id="precio_total" value="@Model.Precio_total" />
+            </div>
+        </div>
+        <div class="col-9 text-end">
+            <input class="btn btn-warning" type="submit" id="btnEditar" name="btnEditar" value="Editar" />
+            <a href="/Pedido/Index" class="btn btn-success">Cancelar</a>
+        </div>
+    </form>
+</div>
+<script>
+    $('#btnEditar').click(function (e) {
+        let error = '';
+        if (!$('#Id_cliente').val()) {
+            error = 'Debe seleccionar un cliente\n';
+        }
+        if ($('#fecha').val().trim() == '') {
+            error += 'Debe ingresar una fecha\n';
+        }
+        if ($('#numero_pedido').val().trim() == '') {
+            error += 'Debe ingresar el número de pedido \n';
+        }
+        if ($('#precio_total').val().trim() == '') {
+            error += 'Debe ingresar el precio total \n';
+        }
+        if (error != '') {
+            swal('Verificar Datos Ingresados!!!', error, 'error');
+            e.preventDefault();
+        }
+    });
+    $('.numeros').on('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+    $('.numGuion').on('input', function () {
+        this.value = this.value.replace(/[^0-9-]/g, '');
+    });
+</script>

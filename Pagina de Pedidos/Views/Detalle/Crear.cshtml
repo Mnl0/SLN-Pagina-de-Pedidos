@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Crear";
+}
+<div class="text-center">
+    <h2 class="py-3">Crear Detalle</h2>
+</div>
+<div>
+    <form method="post" action="/Detalle/Crear">
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">N° Pedido: </label>
+            <div class="col-6">
+                @Html.DropDownList("Id_pedido", null, "Seleccione pedido", htmlAttributes: new { @class = "form-control m-2" })
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Producto: </label>
+            <div class="col-6">
+                @Html.DropDownList("Id_producto", null, "Seleccione producto", htmlAttributes: new { @class = "form-control m-2" })
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end numeros">Cantidad:</label>
+            <div class="col-6">
+                <input class="form-control m-2 numeros" type="text" name="Cantidad" id="Cantidad" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end numeros">Precio Total: </label>
+            <div class="col-6">
+                <input class="form-control m-2 numeros" type="text" name="Precio" id="Precio" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Descripcion: </label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="Descripcion" id="Descripcion" />
+            </div>
+        </div>
+        <div class="col-9 text-end">
+            <div>
+                <input class="btn btn-primary" type="submit" id="btnEnviar" value="Guardar" />
+                <a href="/Detalle/Index" class="btn btn-success">Cancelar</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $('#btnEnviar').click(function (e) {
+        let error = '';
+        if (!$('#Id_pedido').val()) {
+            error += 'Debe seleccionar un pedido\n';
+        }
+        if (!$('#Id_producto').val()) {
+            error += 'Debe seleccionar un producto\n';
+        }
+        if ($('#Cantidad').val().trim() == '') {
+            error += 'Debe ingresar una cantidad\n';
+        }
+        if ($('#Precio').val().trim() == '') {
+            error += 'Debe ingresar precio\n';
+        }
+        if ($('#Descripcion').val().trim() == '') {
+            error += 'Debe ingresar una descripcion\n';
+        }
+        if (error != '') {
+            swal('Verificar Datos Ingresados!!!', error, 'error');
+            e.preventDefault();
+        }
+    });
+    $('.numeros').on('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+</script>

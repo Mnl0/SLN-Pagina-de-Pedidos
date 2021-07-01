@@ -1,0 +1,72 @@
+﻿@model Pagina_de_Pedidos.Models.Cliente
+@{
+    ViewBag.Title = "Editar";
+}
+<div class="text-center">
+    <h2 class="py-3">Editar Cliente</h2>
+</div>
+
+<div>
+    <form action="/Cliente/Editar" method="post">
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Id Cliente:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="id_cliente" id="id_cliente" value="@Model.Id_cliente" readonly />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Nombre:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="nombre" id="nombre" value="@Model.Nombre"/>
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Telefono:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2 numeros" type="text" name="telefono" id="telefono" value="@Model.Telefono" maxlength="9" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Direccion:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="direccion" id="direccion" value="@Model.Direccion" />
+            </div>
+        </div>
+        <div class="col-9 text-end">
+            <input class="btn btn-warning" type="submit" id="btnEditar" name="btnEditar" value="Editar"/>
+            <a href="/Cliente/Index" class="btn btn-success">Cancelar</a>
+        </div>
+    </form>
+</div>
+<script>
+    $('#btnEditar').click(function (e) {
+        let error = '';
+        if ($('#nombre').val().trim() == '') {
+            error = 'Debe ingresar nombre del cliente \n';
+        }
+        if ($('#telefono').val().trim() == ''){
+            error += 'Debe ingresar un telefono del cliente \n';
+        }
+        if ($('#telefono').val().length != 9) {
+            error += 'El teléfono debe tener 9 dígitos \n';
+        }
+        if ($('#direccion').val().trim() == '') {
+            error += 'Debe ingresar una direccion del cliente \n';
+        }
+        if (error != '') {
+            swal('Verificar Datos Ingresados!!!', error, 'error');
+            e.preventDefault();
+        }
+    });
+    $('.numeros').on('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+</script>

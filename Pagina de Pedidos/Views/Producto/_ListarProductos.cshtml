@@ -1,0 +1,30 @@
+﻿
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id categoria</th>
+            <th>Id producto</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Descripción</th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id_categoria</td>
+                <td>@item.Id_producto</td>
+                <td>@item.Nombre</td>
+                <td>@item.Precio</td>
+                <td>@item.Descripcion</td>
+                <td class="text-end">
+                    <a href="/Producto/Editar/@item.Id_producto" class="btn btn-warning">Editar</a>
+                    <a href="/Producto/Eliminar/@item.Id_producto" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

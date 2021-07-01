@@ -1,0 +1,52 @@
+﻿@model Pagina_de_Pedidos.Models.Detalle
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<div class="text-center">
+    <h2 class="py-3">Eliminar Detalle</h2>
+</div>
+<div>
+    <form method="post" action="/Detalle/Eliminar">
+        <input type="hidden" name="id_detalle" value="@Model.Id_detalle" readonly />
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">id producto: </label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="id_producto" value="@Model.Id_producto" readonly />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">id pedido: </label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="id_pedido" value="@Model.Id_pedido" readonly />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">cantidad: </label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="cantidad" value="@Model.Cantidad" readonly />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">descripcion: </label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="descripcion" value="@Model.Descripcion" readonly />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">precio: </label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="precio" value="@Model.Precio" readonly />
+            </div>
+        </div>
+        <div class="col-9 text-end">
+            <input class="btn btn-danger" type="submit" id="btnEliminar" value="Eliminar" />
+            <a href="/Detalle/Index" class="btn btn-success">Cancelar</a>
+        </div>
+    </form>
+</div>
+<script>
+    $('#btnEliminar').click(function (e) {
+            alert('eliminado con exito');
+    });
+</script>
