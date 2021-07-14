@@ -2,8 +2,8 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Id categoria</th>
-            <th>Id producto</th>
+            <th hidden>Id categoria</th>
+            <th hidden>Id producto</th>
             <th>Nombre</th>
             <th>Precio</th>
             <th>Descripción</th>
@@ -15,8 +15,8 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Id_categoria</td>
-                <td>@item.Id_producto</td>
+                <td hidden>@item.Id_categoria</td>
+                <td hidden>@item.Id_producto</td>
                 <td>@item.Nombre</td>
                 <td>@item.Precio</td>
                 <td>@item.Descripcion</td>

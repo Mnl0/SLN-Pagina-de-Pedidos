@@ -1,0 +1,85 @@
+﻿@model Pagina_de_Pedidos.Models.Usuario
+@{
+    ViewBag.Title = "Editar";
+}
+<div class="text-center">
+    <h2 class="py-3">Editar Usuario</h2>
+</div>
+
+<div>
+    <form action="/Usuario/Editar" method="post">
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Id Usuario:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="id_usuario" id="id_usuario" value="@Model.id_usuario" readonly />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Nombre:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="nombre" id="nombre" value="@Model.nombre" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Rut:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2 " type="text" name="rut" id="rut" value="@Model.rut" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Email:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="email" id="email" value="@Model.email" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Contrasena:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="contrasena" id="contrasena" value="@Model.contrasena" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Tipo Usuario:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="id_tipousuario" id="id_tipousuario" value="@Model.TipoUsuario.nombre" readonly />
+            </div>
+        </div>
+        <div class="col-9 text-end">
+            <input class="btn btn-warning" type="submit" id="btnEditar" name="btnEditar" value="Editar" />
+            <a href="/Usuario/Index" class="btn btn-success">Cancelar</a>
+        </div>
+    </form>
+</div>
+<script>
+    $('#btnEditar').click(function (e) {
+        let error = '';
+        if ($('#nombre').val().trim() == '') {
+            error = 'Debe ingresar nombre\n';
+        }
+        if ($('#rut').val().trim() == ''){
+            error += 'Debe ingresar un rut\n';
+        }
+        if ($('#email').val().trim() == '') {
+            error += 'Debe ingresar un email\n';
+        }
+        if ($('#contrasena').val().trim() == '') {
+            error += 'Debe ingresar una contrasena\n';
+        }
+        if (error != '') {
+            swal('Verificar Datos Ingresados!!!', error, 'error');
+            e.preventDefault();
+        }
+    });
+</script>

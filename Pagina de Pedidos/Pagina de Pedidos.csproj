@@ -94,8 +94,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="completo.png" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\estilos.css" />
+    <Content Include="Content\login.css" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
@@ -121,6 +122,8 @@
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
+    <Compile Include="Controllers\TipoUsuarioController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -154,7 +157,10 @@
     <Compile Include="Models\Producto.cs">
       <DependentUpon>Bd_Pedido.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
+    <Compile Include="Models\TipoUsuario.cs">
+      <DependentUpon>Bd_Pedido.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuario.cs">
       <DependentUpon>Bd_Pedido.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -193,6 +199,15 @@
     <Content Include="Views\Detalle\Eliminar.cshtml" />
     <Content Include="Views\Inicio\Index.cshtml" />
     <Content Include="Views\Producto\_ListarProductos.cshtml" />
+    <Content Include="Views\Usuario\Editar.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\Crear.cshtml" />
+    <Content Include="Views\Usuario\Eliminar.cshtml" />
+    <Content Include="Views\TipoUsuario\Index.cshtml" />
+    <Content Include="Views\TipoUsuario\Crear.cshtml" />
+    <Content Include="Views\TipoUsuario\Editar.cshtml" />
+    <Content Include="Views\TipoUsuario\Eliminar.cshtml" />
+    <Content Include="Views\Usuario\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

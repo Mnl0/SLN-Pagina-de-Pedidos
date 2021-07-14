@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Crear";
+}
+<div class="text-center">
+    <h2 class="py-3">Crear Tipo Usuario</h2>
+</div>
+<div>
+    <form class="" method="post" action="/TipoUsuario/Crear">
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Nombre: </label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="nombre" id="nombre" />
+            </div>
+        </div>
+        <div class="text-center">
+            <div class="text-end col-9">
+                <input class="btn btn-primary" type="submit" id="btnEnviar" value="Guardar" />
+                <a href="/TipoUsuario/Index" class="btn btn-success">Cancelar</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $('#btnEnviar').click(function (e) {
+        let error = '';
+        if ($('#nombre').val().trim() == '') {
+            error = 'Debe ingresar un nombre\n';
+        }
+        if (error != '') {
+            swal('Verificar Datos Ingresados!!!', error, 'error');
+            e.preventDefault();
+        }
+    });
+</script>

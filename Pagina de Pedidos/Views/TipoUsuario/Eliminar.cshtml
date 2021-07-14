@@ -1,0 +1,28 @@
+﻿@model Pagina_de_Pedidos.Models.TipoUsuario
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<div class="text-center">
+    <h2 class="py-3">Eliminar Tipo</h2>
+</div>
+<div>
+    <form method="post" action="/TipoUsuario/Eliminar">
+        <input type="hidden" name="id_tipoUsuario" value="@Model.id_tipoUsuario" />
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Nombre: </label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="nombre" value="@Model.nombre" readonly />
+            </div>
+        </div>
+        <div class="text-end col-9">
+            <input class="btn btn-danger" type="submit" id="btnEliminar" value="Eliminar" />
+            <a href="/TipoUsuario/Index" class="btn btn-success">Cancelar</a>
+        </div>
+    </form>
+</div>
+<script>
+    $('#btnEliminar').click(function (e) {
+            alert('eliminado con exito');
+    });
+</script>

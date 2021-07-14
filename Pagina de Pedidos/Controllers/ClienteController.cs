@@ -24,12 +24,13 @@ namespace Pagina_de_Pedidos.Controllers
             bd.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        //LISTADO
         public ActionResult Index()
         {
             var cliente = bd.Cliente.ToList();
             return View(cliente);
         }
+
         //MANTENEDOR EDITAR
         public ActionResult Editar(int? id)
         {

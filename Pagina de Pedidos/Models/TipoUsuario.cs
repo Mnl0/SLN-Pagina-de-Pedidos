@@ -12,22 +12,16 @@ namespace Pagina_de_Pedidos.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Pedido
+    public partial class TipoUsuario
     {
-        public Pedido()
+        public TipoUsuario()
         {
-            this.Detalle = new HashSet<Detalle>();
+            this.Usuario = new HashSet<Usuario>();
         }
     
-        public int Id_pedido { get; set; }
-        public int Id_cliente { get; set; }
-        public System.DateTime Fecha { get; set; }
-        public int Precio_total { get; set; }
-        public int Numero_pedido { get; set; }
-        public int id_usuario { get; set; }
+        public int id_tipoUsuario { get; set; }
+        public string nombre { get; set; }
     
-        public virtual Cliente Cliente { get; set; }
-        public virtual ICollection<Detalle> Detalle { get; set; }
-        public virtual Usuario Usuario { get; set; }
+        public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }

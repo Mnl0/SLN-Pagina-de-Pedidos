@@ -26,13 +26,12 @@ namespace Pagina_de_Pedidos.Controllers
 
             return RedirectToAction("Index");
         }
+        //LISTADO
         public ActionResult Index()
         {
-
-            ViewBag.producto = new SelectList(bd.Producto, "Id_producto", "nombre");
+            ViewBag.categoria = new SelectList(bd.Categoria, "id_categoria", "nombre");
             return View();
         }
-
         //MANTENEDOR EDITAR
         public ActionResult Editar(int? id)
         {
@@ -87,13 +86,13 @@ namespace Pagina_de_Pedidos.Controllers
             }
             return RedirectToAction("Index");
         }
-        //buscar segun filtos
-        public ActionResult ListarProductos(int? producto)
+        //Mantenedor buscar filtrar
+        public ActionResult ListarProductos(int? categoria)
         {
             var productos = bd.Producto.ToList();
-            if (producto != null)
+            if (categoria != null)
             {
-                productos = productos.Where(p => p.Id_producto == producto).ToList();
+                productos = productos.Where(p => p.Id_categoria == categoria).ToList();
             }
 
             return PartialView("_ListarProductos",productos);

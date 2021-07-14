@@ -9,6 +9,7 @@ namespace Pagina_de_Pedidos.Controllers
 {
     public class PedidoController : Controller
     {
+        //agregar el Session["iduss"].Tostring(); para grabar quien tomo el pedido 
         private PaginaPedidoEntities bd = new PaginaPedidoEntities();
 
         //MANTENEDOR CREAR
@@ -26,6 +27,7 @@ namespace Pagina_de_Pedidos.Controllers
 
             return RedirectToAction("Index");
         }
+        //LISTADO
         public ActionResult Index()
         {
             var pedido = bd.Pedido.ToList();

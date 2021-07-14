@@ -1,0 +1,46 @@
+﻿@model Pagina_de_Pedidos.Models.TipoUsuario
+@{
+    ViewBag.Title = "Editar";
+}
+<div class="text-center">
+    <h2 class="py-3">Editar Tipo</h2>
+</div>
+
+<div>
+    <form action="/TipoUsuario/Editar" method="post">
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Id TipoUsuario:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="id_tipoUsuario" id="id_tipoUsuario" value="@Model.id_tipoUsuario" readonly />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <div class="col-3 text-end">
+                <label>Nombre:</label>
+            </div>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="nombre" id="nombre" value="@Model.nombre" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="text-end col-9">
+                <input class="btn btn-warning" type="submit" id="btnEditar" name="btnEditar" value="Editar" />
+                <a href="/TipoUsuario/Index" class="btn btn-success">Cancelar</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $('#btnEditar').click(function (e) {
+        let error = '';
+        if ($('#nombre').val().trim() == '') {
+            error = 'Debe ingresar nombre\n';
+        }
+        if (error != '') {
+            swal('Verificar Datos Ingresados!!!', error, 'error');
+            e.preventDefault();
+        }
+    });
+</script>

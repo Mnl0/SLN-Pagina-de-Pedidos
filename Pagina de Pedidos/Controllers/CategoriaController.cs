@@ -25,6 +25,7 @@ namespace Pagina_de_Pedidos.Controllers
             bd.SaveChanges();
             return RedirectToAction("Index");
         }
+        //LISTADO
         public ActionResult Index()
         {
             var categoria = bd.Categoria.ToList();

@@ -1,0 +1,39 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link href="~/Content/login.css"  rel="stylesheet" />
+    <!------ Include the above in your HEAD tag ---------->
+    <title>Login</title>
+</head>
+<body>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <!-- Icon -->
+            <div class="fadeIn first">
+            </div>
+
+            <!-- Login Form -->
+            <form method="post" action="@Url.Action("Login")">
+                <input type="text" id="login" class="fadeIn second" name="email" placeholder="email">
+                <input type="text" id="password" class="fadeIn third" name="contrasena" placeholder="contrasena">
+                <input type="submit" class="fadeIn fourth" value="Ingresar">
+            </form>
+
+        @*validacion de campos vacios*@
+
+        </div>
+    </div>
+</body>
+</html>

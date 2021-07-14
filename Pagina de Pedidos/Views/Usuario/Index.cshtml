@@ -1,0 +1,45 @@
+﻿
+@model IEnumerable<Pagina_de_Pedidos.Models.Usuario>
+@{
+    ViewBag.Title = "Index";
+}
+<h2 class="text-center py-3">Lista de Usuarioh2>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="">Datos de Usuario</i>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Rut</th>
+                    <th>Email</th>
+                    <th>Contrasena</th>
+                    <th>Tipo Usuario</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.id_usuario</td>
+                        <td>@item.nombre</td>
+                        <td>@item.rut</td>
+                        <td>@item.email</td>
+                        <td>@item.contrasena</td>
+                        <td>@item.TipoUsuario.nombre</td>
+                        <td class="text-end">
+                            <a href="/Usuario/Editar/@item.id_usuario" class="btn btn-warning ">Editar</a>
+                            <a href="/Usuario/Eliminar/@item.id_usuario" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a class="btn btn-success" href="/Usuario/Crear/">Crear usuario</a>
+    </div>
+</div>

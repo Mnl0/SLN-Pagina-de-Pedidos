@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Index";
 }
-    <h2 class="text-center py-3">Lista de Productos</h2>
+<h2 class="text-center py-3">Lista de Productos</h2>
 
 <div class="card mb-4 mb-5 pb-3">
     <div class="card-header">
@@ -12,23 +12,30 @@
         <div class="form-group row">
             <label class="col-1">Producto</label>
             <div class="col-2">
-                @Html.DropDownList("Producto", null, "todos", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("categoria", null, "Todos", htmlAttributes: new { @class = "form-control" })
             </div>
-        <button class="btn btn-success" id="buscar">Buscar</button>
+            <div class="col-3">
+                <button class="btn btn-success" id="buscar">Buscar</button>
+            </div>
         </div>
-        <a class="btn btn-success" href="/Producto/Crear/">Crear nuevo Producto</a>
+        <div class="">
+            <a class="btn btn-success" href="/Producto/Crear/">Crear Producto</a>
+        </div>
     </div>
     <div class="card-footer">
-        <div class="table-responsive" id="tablaProductos">
-
+        <div class="table-responsive" id="tablaCategoria">
         </div>
     </div>
 </div>
+
 <script>
-    $('#buscar').click(function ()){
-        //agrego una variable datos los agrega en el get
-        $.get('@Url.Action("listarProductos")' + '?producto =' + $('#productos').val(), function (productos) {
-            $('#tablaProductos').html.(productos);
+    $('#buscar').click(function () {
+        cargarTabla();
+    });
+    function cargarTabla() {
+        let datos = '?categoria=' + $('#categoria').val();
+        $.get('@Url.Action("ListarProductos")' + datos, function (categoria) {
+            $('#tablaCategoria').html(categoria);
         });
     }
 </script>

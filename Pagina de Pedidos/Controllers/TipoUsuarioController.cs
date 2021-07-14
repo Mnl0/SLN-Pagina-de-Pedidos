@@ -7,45 +7,36 @@ using System.Web.Mvc;
 
 namespace Pagina_de_Pedidos.Controllers
 {
-    public class DetalleController : Controller
+    public class TipoUsuarioController : Controller
     {
         private PaginaPedidoEntities bd = new PaginaPedidoEntities();
-
         //MANTENEDOR CREAR
         public ActionResult Crear()
         {
-            ViewBag.Id_producto = new SelectList(bd.Producto, "Id_producto", "Nombre");
-            ViewBag.Id_pedido = new SelectList(bd.Pedido, "Id_pedido", "Id_pedido");
             return View();
         }
         [HttpPost]
-        public ActionResult Crear(Detalle detalle)
+        public ActionResult Crear(TipoUsuario tipoUsuario)
         {
-            bd.Detalle.Add(detalle);
+            bd.TipoUsuario.Add(tipoUsuario);
             bd.SaveChanges();
-            ViewBag.Id_producto = new SelectList(bd.Producto, "Id_producto", "Nombre");
-            ViewBag.Id_pedido = new SelectList(bd.Pedido, "Id_pedido", "Id_pedido");
-
             return RedirectToAction("Index");
         }
-        //LISTADO
+        //Listado
         public ActionResult Index()
         {
-            var detalle = bd.Detalle.ToList();
-            return View(detalle);
+            var tipoUsuario = bd.TipoUsuario.ToList();
+            return View(tipoUsuario);
         }
-
         //MANTENEDOR EDITAR
         public ActionResult Editar(int? id)
         {
             if (id != null)
             {
-                var detalle = bd.Detalle.Find(id);
-                if (detalle != null)
+                var tipoUsuario = bd.TipoUsuario.Find(id);
+                if (tipoUsuario != null)
                 {
-                    ViewBag.Id_producto = new SelectList(bd.Producto, "Id_producto", "Nombre");
-                    ViewBag.Id_pedido = new SelectList(bd.Pedido, "Id_pedido", "Id_pedido");
-                    return View(detalle);
+                    return View(tipoUsuario);
                 }
                 else
                 {
@@ -58,38 +49,36 @@ namespace Pagina_de_Pedidos.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Editar(Detalle detalle)
+        public ActionResult Editar(TipoUsuario tipoUsuario)
         {
-            bd.Entry(detalle).State = System.Data.EntityState.Modified;
+            bd.Entry(tipoUsuario).State = System.Data.EntityState.Modified;
             bd.SaveChanges();
 
             return RedirectToAction("Index");
         }
-
         //MANTENEDOR ELIMINAR
         public ActionResult Eliminar(int? id)
         {
             if (id != null)
             {
-                var detalle = bd.Detalle.Find(id);
-                if (detalle != null)
+                var tipoUsuario = bd.TipoUsuario.Find(id);
+                if (tipoUsuario != null)
                 {
-                    return View(detalle);
+                    return View(tipoUsuario);
                 }
             }
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public ActionResult Eliminar(int id_detalle)
+        public ActionResult Eliminar(int id_tipoUsuario)
         {
-            var detalle = bd.Detalle.Find(id_detalle);
-            if (detalle != null)
+            var tipoUsuario = bd.TipoUsuario.Find(id_tipoUsuario);
+            if (tipoUsuario != null)
             {
-                bd.Detalle.Remove(detalle);
+                bd.TipoUsuario.Remove(tipoUsuario);
                 bd.SaveChanges();
             }
             return RedirectToAction("Index");
-
         }
     }
 }

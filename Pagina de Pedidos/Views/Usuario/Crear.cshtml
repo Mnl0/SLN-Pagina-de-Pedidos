@@ -1,12 +1,17 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Crear";
 }
 <div class="text-center">
-    <h2 class="py-3">Crear Cliente</h2>
+    <h2 class="py-3">Crear Usuario</h2>
 </div>
 <div>
     <form method="post" action="/Usuario/Crear">
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Tipo de usuario: </label>
+            <div class="col-6">
+                @Html.DropDownList("id_tipoUsuario",null, "Seleccione tipo usuairo", htmlAttributes: new { @class = "form-control m-2" })
+            </div>
+        </div>
         <div class="form-group row align-items-center">
             <label class="col-3 text-end">Nombre: </label>
             <div class="col-6">
@@ -14,24 +19,29 @@
             </div>
         </div>
         <div class="form-group row align-items-center">
-            <label class="col-3 text-end">Telefono: </label>
+            <label class="col-3 text-end">Rut: </label>
             <div class="col-6">
-                <input class="form-control m-2 numeros" type="text" name="telefono" id="telefono" maxlength="9" />
+                <input class="form-control m-2" type="text" name="rut" id="rut" />
             </div>
         </div>
         <div class="form-group row align-items-center">
-            <label class="col-3 text-end">Direccion:</label>
+            <label class="col-3 text-end">Email:</label>
             <div class="col-6">
-                <input class="form-control m-2" type="text" name="direccion" id="direccion" />
+                <input class="form-control m-2" type="text" name="email" id="email" />
+            </div>
+        </div>
+        <div class="form-group row align-items-center">
+            <label class="col-3 text-end">Contrasena:</label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="contrasena" id="contrasena" />
             </div>
         </div>
         <div class="col-9 text-end">
             <input class="btn btn-primary" type="submit" id="btnEnviar" value="Guardar" />
-            <a href="/Cliente/Index" class="btn btn-success">Cancelar</a>
+            <a href="/Usuario/Index" class="btn btn-success">Cancelar</a>
         </div>
     </form>
 </div>
-@*REVISAR LAS VALIDACIONES MAS TARDE*@
 <script>
     $('#btnEnviar').click(function (e) {
         let error = '';

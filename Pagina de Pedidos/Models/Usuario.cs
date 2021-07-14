@@ -12,12 +12,21 @@ namespace Pagina_de_Pedidos.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class Usuario
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public Usuario()
+        {
+            this.Pedido = new HashSet<Pedido>();
+        }
+    
+        public int id_usuario { get; set; }
+        public string nombre { get; set; }
+        public string rut { get; set; }
+        public string email { get; set; }
+        public string contrasena { get; set; }
+        public int id_tipousuario { get; set; }
+    
+        public virtual ICollection<Pedido> Pedido { get; set; }
+        public virtual TipoUsuario TipoUsuario { get; set; }
     }
 }

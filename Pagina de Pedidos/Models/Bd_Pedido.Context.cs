@@ -30,6 +30,7 @@ namespace Pagina_de_Pedidos.Models
         public DbSet<Detalle> Detalle { get; set; }
         public DbSet<Pedido> Pedido { get; set; }
         public DbSet<Producto> Producto { get; set; }
-        public DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public DbSet<TipoUsuario> TipoUsuario { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
     }
 }
