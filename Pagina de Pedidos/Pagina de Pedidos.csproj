@@ -208,6 +208,8 @@
     <Content Include="Views\TipoUsuario\Editar.cshtml" />
     <Content Include="Views\TipoUsuario\Eliminar.cshtml" />
     <Content Include="Views\Usuario\Login.cshtml" />
+    <Content Include="Views\Shared\_menuAdmin.cshtml" />
+    <Content Include="Views\Shared\_menuVendedor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

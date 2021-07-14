@@ -9,6 +9,9 @@
     <link href="~/Content/estilos.css" rel="stylesheet"/>
 </head>
 <body>
+    @if (Session["iduss"] != null)
+    {
+
     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark ancla">
         <div class="container-fluid header">
             <a class="navbar-brand" href="/Inicio/Index/"><i class="fas fa-hotdog"></i> Pedidos Ñam</a>
@@ -17,32 +20,22 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item li">
-                        <a class="nav-link active" aria-current="page" href="/Categoria/Index/">Categorías</a>
-                    </li>
-                    <li class="nav-item li">
-                        <a class="nav-link active" aria-current="page" href="/Producto/Index/">Productos</a>
-                    </li>
-                    <li class="nav-item li">
-                        <a class="nav-link active" href="/Cliente/Index/">Clientes</a>
-                    </li>
-                    <li class="nav-item li">
-                        <a class="nav-link active" href="/Pedido/Index/">Pedidos</a>
-                    </li>
-                    <li class="nav-item li">
-                        <a class="nav-link active" href="/Detalle/Index/">Detalles</a>
-                    </li>
-                    <li class="nav-item li">
-                        <a class="nav-link active" href="/Usuario/Index/">Usuarios</a>
-                    </li>
-                    <ul class="nav-item li">
-                        <li>
+                    @if (Session["tipouss"].ToString() == "1")
+                    {
+
+                        @Html.Partial("_menuAdmin");
+                    }
+                    @if (Session["tipouss"].ToString() == "2")
+                    {
+
+                        @Html.Partial("_menuVendedor");
+                    }
+                    <li>
                         <p class="nav-link active">@Session["Nombre"]</p>
-                        </li>
-                        <li>
-                        <a class="nav-link active" href="/Usuario/Index/">Salir</a>
-                        </li>
-                    </ul>
+                    </li>
+                    <li>
+                        <a class="nav-link active" href="@Url.Action("Logout","Usuario")">Salir</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -59,7 +52,10 @@
         <div class="h-100 p-3 d-flex justify-content-center align-items-center" style="background-color: rgba(0, 0, 0, 0.2);">
             <p>&copy; @DateTime.Now.Year - Copyright: Instituto Profesional Virgino Gómez</p>
         </div>
-    </footer>
+    </footer>      
+    }else{
+        Response.Redirect("~/Usuario/Login");
+    }
  
 </body>
 </html>

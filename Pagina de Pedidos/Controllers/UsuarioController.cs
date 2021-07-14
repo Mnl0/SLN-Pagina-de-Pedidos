@@ -25,14 +25,17 @@ namespace Pagina_de_Pedidos.Controllers
             {
                 Session["Nombre"] = uss.nombre + " " + uss.email;
                 Session["iduss"] = uss.id_usuario;
+                Session["tipoUss"] = uss.id_tipousuario;
                 return RedirectToAction("Index", "Inicio");
             }
             return View();
         }
         public ActionResult Logout()
         {
-
-            return View();
+            Session.Clear();
+            Session.RemoveAll();
+            Session.Abandon();
+            return RedirectToAction("Login");
         }
         // MANTENEDOR CREAR
         public ActionResult Crear()
