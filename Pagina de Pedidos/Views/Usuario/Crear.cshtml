@@ -42,6 +42,7 @@
         </div>
     </form>
 </div>
+<script src="~/Scripts/swal.min.js"></script>
 <script>
     $('#btnEnviar').click(function (e) {
         let error = '';
@@ -62,7 +63,40 @@
             e.preventDefault();
         }
     });
-    $('.numeros').on('input', function () {
-        this.value = this.value.replace(/[^0-9]/g, '');
+    $('#rut').blur(function () {
+        if ($('#rut').val().trim() != '') {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("RutExiste")',
+                data: '{existe:' + JSON.stringify($('#rut').val().trim()) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    if (result != '') {
+                        swal('Error', 'El rut existe: ' + result +' ya se encuentra regristrado', 'warning');
+                        $('#rut').val();
+                    }
+                }
+
+            });
+        }
+    });
+        $('#email').blur(function () {
+        if ($('#email').val().trim() != '') {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("EmailExiste") ',
+                data: '{existe:' + JSON.stringify($('#email').val().trim()) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    if (result != '') {
+                        swal('Error', 'El email existe: ' + result + ' ya se encuentra regristrado', 'warning');
+                        $('#email').val();
+                    }
+                }
+
+            });
+        }
     });
 </script>

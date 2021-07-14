@@ -110,13 +110,26 @@ namespace Pagina_de_Pedidos.Controllers
             return RedirectToAction("Index");
         }
 
-        //REVISAR SI FUNCIONA BIEN ESO Y APLICAR A LOS DEMAS ATRIBUTOS NO DEBEN REPETIRSE LOS USUARIOS
+        //OK
         [HttpPost]
-        public ActionResult rutExiste(string existe)
+        public ActionResult RutExiste(string existe)
         {
             if (!string.IsNullOrEmpty(existe))
             {
                 var q = bd.Usuario.FirstOrDefault(e => e.rut.ToLower().Equals(existe.ToLower()));
+                if (q != null)
+                {
+                    string nombre = q.nombre;
+                    return Json(nombre);
+                }
+            }
+            return Json("");
+        }
+        public ActionResult EmailExiste(string existe)
+        {
+            if (!string.IsNullOrEmpty(existe))
+            {
+                var q = bd.Usuario.FirstOrDefault(e => e.email.ToLower().Equals(existe.ToLower()));
                 if (q != null)
                 {
                     string nombre = q.nombre;
