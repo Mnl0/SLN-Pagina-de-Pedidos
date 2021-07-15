@@ -32,4 +32,21 @@
             e.preventDefault();
         }
     });
+    $('#nombre').blur(function () {
+        if ($('#nombre').val().trim() != '') {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("TipoExiste")',
+                data: '{tipo:' + JSON.stringify($('#nombre').val().trim()) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (cosa) {
+                    if (cosa != '') {
+                        swal('Error', 'El tipo de usuario:' + cosa + ' ya existe', 'warning');
+                        $('#nombre').val();
+                    }
+                }
+            });
+        }
+    });
 </script>

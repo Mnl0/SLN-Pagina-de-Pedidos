@@ -63,4 +63,23 @@
     $('.numGuion').on('input', function () {
         this.value = this.value.replace(/[^0-9-]/g, '');
     });
+    //falta corroborar porque no tenemos ningun pedido ingresado
+    $('#numero_pedido').blur(function () {
+        if ($('#numero_pedido').val().trim() != '') {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("PedidoExiste")',
+                data: '{pedido:' + JSON.stringify($('#rut').val().trim()) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    if (result != '') {
+                        swal('Error', 'El pedido: ' + result +' ya se encuentra regristrado', 'warning');
+                        $('#numero_pedido').val();
+                    }
+                }
+
+            });
+        }
+    });
 </script>

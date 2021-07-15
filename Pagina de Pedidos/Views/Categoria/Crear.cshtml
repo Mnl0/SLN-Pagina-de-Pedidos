@@ -41,4 +41,22 @@
             e.preventDefault();
         }
     });
+    $('#nombre').blur(function () {
+        if ($('#nombre').val().trim() != '') {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("CategoriaExiste")',
+                data: '{categoria:' + JSON.stringify($('#nombre').val().trim()) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    if (result != '') {
+                        swal('Error', 'La categoria: ' + result +' ya se encuentra regristrado', 'warning');
+                        $('#nombre').val();
+                    }
+                }
+
+            });
+        }
+    });
 </script>

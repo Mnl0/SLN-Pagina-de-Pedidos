@@ -8,7 +8,7 @@
 </div>
 <div>
     <form method="post" action="/Usuario/Eliminar">
-        <input type="hidden" name="id_cliente" value="@Model.id_usuario" readonly />
+        <input type="hidden" name="id_usuario" value="@Model.id_usuario" readonly />
         <div class="form-group row align-items-center">
             <label class="col-3 text-end">Nombre: </label>
             <div class="col-6">
@@ -33,10 +33,16 @@
                 <input class="form-control m-2" type="text" name="contrasena" value="@Model.contrasena" readonly />
             </div>
         </div>
+        <div class="form-group row align-items-center" hidden>
+            <label class="col-3 text-end">Tipo Usuario:</label>
+            <div class="col-6">
+                <input class="form-control m-2" type="text" name="tipoUsuario" value="@Model.id_tipousuario" readonly />
+            </div>
+        </div>
         <div class="form-group row align-items-center">
             <label class="col-3 text-end">Tipo Usuario:</label>
             <div class="col-6">
-                <input class="form-control m-2" type="text" name="tipoUsuario" value="@Model.TipoUsuario.nombre" readonly />
+                <input class="form-control m-2" type="text" name="" value="@Model.TipoUsuario.nombre" readonly />
             </div>
         </div>
         <div class=" col-9 text-end">
@@ -45,8 +51,12 @@
         </div>
     </form>
 </div>
+@*falta agregar un swal alert cuando se elimina de forma correcta*@
 <script>
     $('#btnEliminar').click(function (e) {
+        if (true) {
+
+        }
             alert('eliminado con exito');
     });
 </script>

@@ -83,5 +83,20 @@ namespace Pagina_de_Pedidos.Controllers
             }
             return RedirectToAction("Index");
         }
+        //OK
+        [HttpPost]
+        public ActionResult ClienteExiste(string cliente)
+        {
+            if (!string.IsNullOrEmpty(cliente))
+            {
+                var q = bd.Cliente.FirstOrDefault(e => e.Telefono.ToLower().Equals(cliente.ToLower()));
+                if (q != null)
+                {
+                    string nombre = q.Nombre;
+                    return Json(nombre);
+                }
+            }
+            return Json("");
+        }
     }
 }

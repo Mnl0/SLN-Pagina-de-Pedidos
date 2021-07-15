@@ -80,5 +80,21 @@ namespace Pagina_de_Pedidos.Controllers
             }
             return RedirectToAction("Index");
         }
+        //OK
+        [HttpPost]
+        public ActionResult TipoExiste(string tipo)
+        {
+            if (!string.IsNullOrEmpty(tipo))
+            {
+                var q = bd.TipoUsuario.FirstOrDefault(e => e.nombre.ToLower().Equals(tipo.ToLower()));
+                if (q != null)
+                {
+                    string nombre = q.nombre;
+                    return Json(nombre);
+                }
+            }
+            return Json("");
+        }
+
     }
 }

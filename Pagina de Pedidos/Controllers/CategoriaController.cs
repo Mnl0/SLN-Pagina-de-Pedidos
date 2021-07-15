@@ -82,6 +82,21 @@ namespace Pagina_de_Pedidos.Controllers
                 bd.SaveChanges();
             }
             return RedirectToAction("Index");
-        }    
+        }
+        //OK
+        [HttpPost]
+        public ActionResult CategoriaExiste(string categoria)
+        {
+            if (!string.IsNullOrEmpty(categoria))
+            {
+                var q = bd.Categoria.FirstOrDefault(e => e.Nombre.ToLower().Equals(categoria.ToLower()));
+                if (q != null)
+                {
+                    string nombre = q.Nombre;
+                    return Json(nombre);
+                }
+            }
+            return Json("");
+        }
     }
 }

@@ -6,7 +6,7 @@
     <h2 class="py-3">Crear Cliente</h2>
 </div>
 <div>
-    <form method="post" action="/Usuario/Crear">
+    <form method="post" action="/Cliente/Crear">
         <div class="form-group row align-items-center">
             <label class="col-3 text-end">Nombre: </label>
             <div class="col-6">
@@ -54,5 +54,23 @@
     });
     $('.numeros').on('input', function () {
         this.value = this.value.replace(/[^0-9]/g, '');
+    });
+    $('#telefono').blur(function () {
+        if ($('#telefono').val().trim() != '') {
+            $.ajax({
+                type: 'POST',
+                url:  '@Url.Action("ClienteExiste")',
+                data: '{cliente:' + JSON.stringify($('#telefono').val().trim()) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    if (result != '') {
+                        swal('Error', 'El telefono se encuentra asociado al cliente: ' + result );
+                        $('#telefono').UrlrActionlrlal();
+                    }
+                }
+
+            });
+        }
     });
 </script>

@@ -89,5 +89,20 @@ namespace Pagina_de_Pedidos.Controllers
             return RedirectToAction("Index");
  
         }
+        //OK
+        [HttpPost]
+        public ActionResult PedidoExiste(string pedido)
+        {
+            if (!string.IsNullOrEmpty(pedido))
+            {
+                var q = bd.Pedido.FirstOrDefault(e => e.Numero_pedido.Equals(pedido));
+                if (q != null)
+                {
+                    int ped = q.Numero_pedido;
+                    return Json(ped);
+                }
+            }
+            return Json("");
+        }
     }
 }
