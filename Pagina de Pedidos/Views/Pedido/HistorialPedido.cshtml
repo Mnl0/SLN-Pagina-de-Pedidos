@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Pagina_de_Pedidos.Models.Pedido>
+@{ ViewBag.Title = "Historial Pedido"; }
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h3>Listado De Pedidos Ingresados</h3>
+    </div>
+    <div class="container-fluid ">
+        <div class="form-group row justify-content-center p-5">
+            <label class="col-2 text-end">Fecha Ingreso</label>
+            <div class="col-2">
+                <input type="text" id="fechas" name="fechas" class="form-control" />
+            </div>
+            <div class="col-2">
+                <button class="btn btn-success" id="buscarFecha">Buscar</button>
+            </div>
+        </div>
+        <hr />
+        <div class="table-responsive" id="tablaPedido">
+
+        </div>
+    </div>
+</div>
+<link href="~/Content/daterangepicker.css" rel="stylesheet" />
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/daterangepicker.js"></script>
+<script>
+    //configuración de la librería
+    $('input[name="fechas"]').daterangepicker({
+        autoUpdateInput: false,
+        autoApply: true,
+        maxDate: moment(),
+        locale: {
+            format: 'DD-MM-YYYY'
+        }
+    });
+    $('input[name="fechas"]').on('apply.daterangepicker', function (ev, picker) {
+        $(this).val(picker.startDate.format('DD-MM-YYYY') + ' hasta ' + picker.endDate.format('DD-MM-YYYY'));
+    });
+    //llamar datos filtrados(vista parcial)
+    $('#buscarFecha').click(function () {
+         //captura de fechas y formato de fechas para enviarlas
+        let inicio = $('#fechas').data('daterangepicker').startDate.format('YYYY-MM-DD');
+        let fin = $('#fechas').data('daterangepicker').endDate.format('YYYY-MM-DD');
+        //datos que permiten acceder al método
+        let datos = '?inicio=' + inicio + '&fin=' + fin;
+        //get para acceeder al método y traer la vista parcial
+        $.get('@Url.Action("ListaPedidos")' + datos, function (respuesta) {
+            $('#tablaPedido').html(respuesta);//carga vista parcial con los datos
+        });
+    });
+</script>

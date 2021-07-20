@@ -2,9 +2,7 @@
 @{
     ViewBag.Title = "Index";
 }
-
 <h2 class="text-center py-3">Lista de los Detalles</h2>
-
 <div class="card mb-4">
     <div class="card-header">
         <i class="">Datos de los Detalles</i>
@@ -13,33 +11,39 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id detalle</th>
-                    <th>Id producto</th>
-                    <th>Id pedido</th>
+                    <th hidden>Id detalle</th>
+                    <th>N Pedido</th>
+                    <th>Cliente</th>
+                    <th>Nombre</th>
+                    <th>Precio Unitario</th>
                     <th>Cantidad</th>
-                    <th>Descripcion</th>
                     <th>Precio Total</th>
+
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
+                    int suma = 0;
+                    suma = @item.Precio * @item.Cantidad;
                     <tr>
-                        <td>@item.Id_detalle</td>
-                        <td>@item.Id_producto</td>
+                        <td hidden>@item.Id_detalle</td>
                         <td>@item.Id_pedido</td>
-                        <td>@item.Cantidad</td>
-                        <td>@item.Descripcion</td>
+                        <td>@item.Pedido.Cliente.Nombre</td>
+                        <td>@item.Producto.Nombre</td>
                         <td>@item.Precio</td>
+                        <td>@item.Cantidad</td>
+                        <td>@suma</td>
                         <td class="text-end">
-                            <a href="/Detalle/Editar/@item.Id_detalle" class="btn btn-warning">Editar</a>
-                            <a href="/Detalle/Eliminar/@item.Id_detalle" class="btn btn-danger">Eliminar</a>
+                            @*<a href="/Detalle/Editar/@item.Id_detalle" class="btn btn-warning">Editar</a>
+                            <a href="/Detalle/Eliminar/@item.Id_detalle" class="btn btn-danger">Eliminar</a>*@
                         </td>
                     </tr>
+
                 }
             </tbody>
         </table>
-        <a class="btn btn-success" href="/Detalle/Crear/">Crear detalle</a>
+        @*<a class="btn btn-success" href="/Detalle/Crear/">Crear detalle</a>*@
     </div>
 </div>

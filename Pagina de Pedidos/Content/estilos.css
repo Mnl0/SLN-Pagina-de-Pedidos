@@ -1,0 +1,22 @@
+﻿body {
+    height:100vh;
+}
+.header{
+    min-height:10%;
+}
+.main{
+    min-height:80%;
+}
+.footer {
+    height: 10%;
+    background: rgba(0, 0, 0, 0.2);
+}
+.li{
+    padding-left:20px;
+    padding-right:20px;
+    display:flex;
+    align-items:center;
+}
+.li a:hover{
+    color:red;
+}

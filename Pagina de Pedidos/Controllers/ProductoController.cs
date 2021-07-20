@@ -10,7 +10,6 @@ namespace Pagina_de_Pedidos.Controllers
     public class ProductoController : Controller
     {
         private PaginaPedidoEntities bd = new PaginaPedidoEntities();
-
         //MANTENEDOR CREAR
         public ActionResult Crear()
         {
@@ -23,7 +22,6 @@ namespace Pagina_de_Pedidos.Controllers
             bd.Producto.Add(producto);
             bd.SaveChanges();
             ViewBag.Id_categoria = new SelectList(bd.Categoria, "Id_categoria", "Nombre");
-
             return RedirectToAction("Index");
         }
         //LISTADO
@@ -61,7 +59,6 @@ namespace Pagina_de_Pedidos.Controllers
             ViewBag.Id_categoria = new SelectList(bd.Categoria, "Id_categoria", "Nombre");
             return RedirectToAction("Index");
         }
-
         //MANTENEDOR ELIMINAR
         public ActionResult Eliminar(int? id)
         {
@@ -86,7 +83,7 @@ namespace Pagina_de_Pedidos.Controllers
             }
             return RedirectToAction("Index");
         }
-        //Mantenedor buscar filtrar
+        //Método buscar filtrar
         public ActionResult ListarProductos(int? categoria)
         {
             var productos = bd.Producto.ToList();
@@ -94,9 +91,7 @@ namespace Pagina_de_Pedidos.Controllers
             {
                 productos = productos.Where(p => p.Id_categoria == categoria).ToList();
             }
-
             return PartialView("_ListarProductos",productos);
         }
-
     }
 }

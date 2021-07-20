@@ -22,7 +22,6 @@ namespace Pagina_de_Pedidos.Controllers
             bd.SaveChanges();
             return RedirectToAction("Index");
         }
-        //Listado
         public ActionResult Index()
         {
             var tipoUsuario = bd.TipoUsuario.ToList();
@@ -53,7 +52,6 @@ namespace Pagina_de_Pedidos.Controllers
         {
             bd.Entry(tipoUsuario).State = System.Data.EntityState.Modified;
             bd.SaveChanges();
-
             return RedirectToAction("Index");
         }
         //MANTENEDOR ELIMINAR
@@ -80,7 +78,6 @@ namespace Pagina_de_Pedidos.Controllers
             }
             return RedirectToAction("Index");
         }
-        //OK
         [HttpPost]
         public ActionResult TipoExiste(string tipo)
         {
@@ -95,6 +92,5 @@ namespace Pagina_de_Pedidos.Controllers
             }
             return Json("");
         }
-
     }
 }

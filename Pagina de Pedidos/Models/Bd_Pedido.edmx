@@ -27,9 +27,8 @@
             <PropertyRef Name="Id_detalle" />
           </Key>
           <Property Name="Id_detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id_producto" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id_producto" Type="int" Nullable="false" />
           <Property Name="Id_pedido" Type="int" Nullable="false" />
           <Property Name="Precio" Type="int" Nullable="false" />
         </EntityType>
@@ -41,7 +40,6 @@
           <Property Name="Id_cliente" Type="int" Nullable="false" />
           <Property Name="Fecha" Type="date" Nullable="false" />
           <Property Name="Precio_total" Type="int" Nullable="false" />
-          <Property Name="Numero_pedido" Type="int" Nullable="false" />
           <Property Name="id_usuario" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Producto">
@@ -238,9 +236,8 @@
             <PropertyRef Name="Id_detalle" />
           </Key>
           <Property Name="Id_detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_producto" Type="Int32" Nullable="false" />
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id_producto" Type="Int32" Nullable="false" />
           <Property Name="Id_pedido" Type="Int32" Nullable="false" />
           <Property Name="Precio" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Pedido" Relationship="PaginaPedidoModel.FK_Detalle_Pedido" FromRole="Detalle" ToRole="Pedido" />
@@ -254,7 +251,6 @@
           <Property Name="Id_cliente" Type="Int32" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Precio_total" Type="Int32" Nullable="false" />
-          <Property Name="Numero_pedido" Type="Int32" Nullable="false" />
           <Property Name="id_usuario" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Cliente" Relationship="PaginaPedidoModel.FK_Pedido_Cliente" FromRole="Pedido" ToRole="Cliente" />
           <NavigationProperty Name="Detalle" Relationship="PaginaPedidoModel.FK_Detalle_Pedido" FromRole="Pedido" ToRole="Detalle" />
@@ -365,7 +361,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -395,9 +391,8 @@
               <MappingFragment StoreEntitySet="Detalle">
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
                 <ScalarProperty Name="Id_pedido" ColumnName="Id_pedido" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Id_producto" ColumnName="Id_producto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Id_detalle" ColumnName="Id_detalle" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -406,7 +401,6 @@
             <EntityTypeMapping TypeName="PaginaPedidoModel.Pedido">
               <MappingFragment StoreEntitySet="Pedido">
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
-                <ScalarProperty Name="Numero_pedido" ColumnName="Numero_pedido" />
                 <ScalarProperty Name="Precio_total" ColumnName="Precio_total" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Id_cliente" ColumnName="Id_cliente" />

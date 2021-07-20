@@ -6,15 +6,15 @@
     <title>@ViewBag.Title - Pagina de Pedidos</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    @*<link href="~/Content/login.css" rel="stylesheet" />*@
     <link href="~/Content/estilos.css" rel="stylesheet"/>
 </head>
 <body>
     @if (Session["iduss"] != null)
     {
-
-    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark ancla">
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
         <div class="container-fluid header">
-            <a class="navbar-brand" href="/Inicio/Index/"><i class="fas fa-hotdog"></i> Pedidos Ñam</a>
+            <a class="navbar-brand" href="/Pedido/Index/"><i class="fas fa-hotdog"></i> Pedidos Ñam</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,10 +31,10 @@
 
                         @Html.Partial("_menuVendedor");
                     }
-                    <li>
-                        <p class="nav-link active">@Session["Nombre"]</p>
+                    <li class="nav-item li">
+                        <a class="nav-link active">@Session["Nombre"]</a>
                     </li>
-                    <li>
+                    <li class="nav-item li">
                         <a class="nav-link active" href="@Url.Action("Logout","Usuario")">Salir</a>
                     </li>
                 </ul>
@@ -45,18 +45,16 @@
     <script src="~/Scripts/popper.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/sweetalert.min.js"></script>
-    <div class="container-fluid body-content py-3 my-3 main">
+    <div class="container-fluid body-content main">
         @RenderBody()
     </div>
-    
-    <footer class="bg-light text-center text-lg-start  w-100 footer">
-        <div class="h-100 p-3 d-flex justify-content-center align-items-center" style="background-color: rgba(0, 0, 0, 0.2);">
+    <footer class="bg-light text-center footer">
+        <div class="h-100  d-flex justify-content-center align-items-center" style="background-color: rgba(0, 0, 0, 0.2);">
             <p>&copy; @DateTime.Now.Year - Copyright: Instituto Profesional Virgino Gómez</p>
         </div>
     </footer>      
     }else{
         Response.Redirect("~/Usuario/Login");
     }
- 
 </body>
 </html>

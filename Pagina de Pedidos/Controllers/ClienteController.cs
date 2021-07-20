@@ -9,12 +9,10 @@ namespace Pagina_de_Pedidos.Controllers
 {
     public class ClienteController : Controller
     {
- 
         private PaginaPedidoEntities bd = new PaginaPedidoEntities();
         //MANTENEDOR CREAR
         public ActionResult Crear()
         {
-
             return View();
         }
         [HttpPost]
@@ -22,7 +20,7 @@ namespace Pagina_de_Pedidos.Controllers
         {
             bd.Cliente.Add(cliente);
             bd.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Pedido");
         }
         //LISTADO
         public ActionResult Index()
@@ -30,7 +28,6 @@ namespace Pagina_de_Pedidos.Controllers
             var cliente = bd.Cliente.ToList();
             return View(cliente);
         }
-
         //MANTENEDOR EDITAR
         public ActionResult Editar(int? id)
         {
@@ -56,7 +53,6 @@ namespace Pagina_de_Pedidos.Controllers
         {
             bd.Entry(cliente).State = System.Data.EntityState.Modified;
             bd.SaveChanges();
-
             return RedirectToAction("Index");
         }
         //MANTENEDOR ELIMINAR
@@ -83,13 +79,38 @@ namespace Pagina_de_Pedidos.Controllers
             }
             return RedirectToAction("Index");
         }
-        //OK
         [HttpPost]
         public ActionResult ClienteExiste(string cliente)
         {
             if (!string.IsNullOrEmpty(cliente))
             {
                 var q = bd.Cliente.FirstOrDefault(e => e.Telefono.ToLower().Equals(cliente.ToLower()));
+                if (q != null)
+                {
+                    string nombre = q.Nombre;
+                    return Json(nombre);
+                }
+            }
+            return Json("");
+        }
+        public ActionResult Cliente2Existe(string cliente)
+        {
+            if (!string.IsNullOrEmpty(cliente))
+            {
+                var q = bd.Cliente.FirstOrDefault(e => e.Nombre.ToLower().Equals(cliente.ToLower()));
+                if (q != null)
+                {
+                    string nombre = q.Nombre;
+                    return Json(nombre);
+                }
+            }
+            return Json("");
+        }
+        public ActionResult Cliente3Existe(string cliente)
+        {
+            if (!string.IsNullOrEmpty(cliente))
+            {
+                var q = bd.Cliente.FirstOrDefault(e => e.Direccion.ToLower().Equals(cliente.ToLower()));
                 if (q != null)
                 {
                     string nombre = q.Nombre;

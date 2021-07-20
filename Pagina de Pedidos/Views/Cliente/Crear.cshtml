@@ -27,11 +27,10 @@
         </div>
         <div class="col-9 text-end">
             <input class="btn btn-primary" type="submit" id="btnEnviar" value="Guardar" />
-            <a href="/Cliente/Index" class="btn btn-success">Cancelar</a>
+            <a href="/Pedido/Index" class="btn btn-success">Cancelar</a>
         </div>
     </form>
 </div>
-@*REVISAR LAS VALIDACIONES MAS TARDE*@
 <script>
     $('#btnEnviar').click(function (e) {
         let error = '';
@@ -69,7 +68,40 @@
                         $('#telefono').UrlrActionlrlal();
                     }
                 }
-
+            });
+        }
+    });
+    $('#nombre').blur(function () {
+        if ($('#nombre').val().trim() != '') {
+            $.ajax({
+                type: 'POST',
+                url:  '@Url.Action("Cliente2Existe")',
+                data: '{cliente:' + JSON.stringify($('#nombre').val().trim()) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    if (result != '') {
+                        swal('Error', 'El nombre cliente se encuentra regristrado: ' + result );
+                        $('#nombre').UrlrActionlrlal();
+                    }
+                }
+            });
+        }
+        });
+    $('#direccion').blur(function () {
+        if ($('#direccion').val().trim() != '') {
+            $.ajax({
+                type: 'POST',
+                url:  '@Url.Action("Cliente3Existe")',
+                data: '{cliente:' + JSON.stringify($('#direccion').val().trim()) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    if (result != '') {
+                        swal('Error', 'La direccion se encuentra regristrada al cliente: ' + result );
+                        $('#direccion').UrlrActionlrlal();
+                    }
+                }
             });
         }
     });

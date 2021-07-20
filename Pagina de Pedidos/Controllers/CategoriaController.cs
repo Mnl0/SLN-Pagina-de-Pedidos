@@ -10,12 +10,10 @@ namespace Pagina_de_Pedidos.Controllers
 {
     public class CategoriaController : Controller
     {
-    
         private PaginaPedidoEntities bd = new PaginaPedidoEntities();
         //MANTENEDOR CREAR
         public ActionResult Crear()
         {
-            
             return View();
         }
         [HttpPost]
@@ -56,7 +54,6 @@ namespace Pagina_de_Pedidos.Controllers
         {
             bd.Entry(categoria).State = System.Data.EntityState.Modified;
             bd.SaveChanges();
-
             return RedirectToAction("Index");
         }
         //MANTENEDOR ELIMINAR
@@ -83,7 +80,6 @@ namespace Pagina_de_Pedidos.Controllers
             }
             return RedirectToAction("Index");
         }
-        //OK
         [HttpPost]
         public ActionResult CategoriaExiste(string categoria)
         {

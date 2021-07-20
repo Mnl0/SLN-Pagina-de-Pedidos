@@ -1,0 +1,25 @@
+﻿
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Número Pedido</th>
+            <th>Nombre Cliente</th>
+            <th>Fecha Ingreso</th>
+            <th>Usuario Ingreso</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id_pedido.Detalle</td>
+                <td>@item.Cliente.Nombre</td>
+                <td>@item.Fecha.ToShortDateString()</td>
+                <td>@item.Usuario.nombre</td>
+
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>

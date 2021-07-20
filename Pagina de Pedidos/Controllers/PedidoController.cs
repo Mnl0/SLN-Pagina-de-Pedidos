@@ -9,100 +9,87 @@ namespace Pagina_de_Pedidos.Controllers
 {
     public class PedidoController : Controller
     {
-        //agregar el Session["iduss"].Tostring(); para grabar quien tomo el pedido 
         private PaginaPedidoEntities bd = new PaginaPedidoEntities();
-
-        //MANTENEDOR CREAR
-        public ActionResult Crear()
-        {
-            ViewBag.Id_cliente = new SelectList(bd.Cliente, "Id_cliente", "Nombre");
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Crear(Pedido pedido)
-        {
-            bd.Pedido.Add(pedido);
-            bd.SaveChanges();
-            ViewBag.Id_cliente = new SelectList(bd.Cliente, "Id_cliente", "Nombre");
-
-            return RedirectToAction("Index");
-        }
-        //LISTADO
         public ActionResult Index()
         {
-            var pedido = bd.Pedido.ToList();
-            return View(pedido);
-        }
-
-        //MANTENEDOR EDITAR
-        public ActionResult Editar(int? id)
-        {
-            if (id != null)
-            {
-                var pedido = bd.Pedido.Find(id);
-                if (pedido != null)
-                {
-                    ViewBag.Id_cliente = new SelectList(bd.Cliente, "Id_cliente", "Nombre");
-                    return View(pedido);
-                }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }
+            ViewBag.Id_cliente = new SelectList(bd.Cliente, "Id_cliente", "Nombre");
+            ViewBag.Id_producto = new SelectList(bd.Producto, "Id_producto", "Nombre");
+            var fecha = DateTime.Now;
+            return View(fecha);
         }
         [HttpPost]
-        public ActionResult Editar(Pedido pedido)
+        public JsonResult buscarPrecio(int? id)
         {
-            bd.Entry(pedido).State = System.Data.EntityState.Modified;
-            bd.SaveChanges();
-
-            return RedirectToAction("Index");
-        }
-
-        //MANTENEDOR ELIMINAR
-        public ActionResult Eliminar(int? id)
-        {
-            if (id != null)
+            var producto = bd.Producto.Find(id);
+            if (producto != null)
             {
-                var pedido = bd.Pedido.Find(id);
-                if (pedido != null)
-                {
-                    return View(pedido);
-                }
+                int pp = producto.Precio; 
+                return Json(pp);
             }
-            return RedirectToAction("Index");
+            return Json("");
         }
         [HttpPost]
-        public ActionResult Eliminar(int id_pedido)
+        public JsonResult buscarCliente(int? id)
         {
-            var pedido = bd.Pedido.Find(id_pedido);
-            if (pedido != null)
+            var cliente = bd.Cliente.Find(id);
+            if (cliente != null)
             {
-                bd.Pedido.Remove(pedido);
-                bd.SaveChanges();
+
+                return Json(cliente);
             }
-            return RedirectToAction("Index");
- 
+            return Json("");
         }
-        //OK
         [HttpPost]
         public ActionResult PedidoExiste(string pedido)
         {
             if (!string.IsNullOrEmpty(pedido))
             {
-                var q = bd.Pedido.FirstOrDefault(e => e.Numero_pedido.Equals(pedido));
+                var q = bd.Pedido.FirstOrDefault(e => e.Id_pedido.Equals(pedido));
                 if (q != null)
                 {
-                    int ped = q.Numero_pedido;
+                    int ped = q.Id_pedido;
                     return Json(ped);
                 }
             }
             return Json("");
+        }
+        [HttpPost]
+        public JsonResult GuardarPedido(Pedido pedido, List<Detalle> detalle)
+        {
+            pedido.Fecha = DateTime.Now;
+            pedido.id_usuario = int.Parse(Session["iduss"].ToString());
+            bd.Pedido.Add(pedido);
+            bd.SaveChanges();
+            var id_pedido = pedido.Id_pedido;
+            var total = pedido.Precio_total;
+
+            foreach (var item in detalle)
+            {
+                item.Id_pedido = id_pedido;
+                bd.Detalle.Add(item);
+                var producto = bd.Producto.Find(item.Id_producto);
+                //var cliente = bd.Cliente.Find(item.Id_pedido);
+                item.Cantidad = item.Cantidad;
+                bd.Entry(producto).State = System.Data.EntityState.Modified;
+                bd.SaveChanges();
+                //var multi = item.Cantidad * producto.Precio;
+            }
+            return Json("");
+        }
+        public ActionResult HistorialPedido()
+        {
+            return View();
+        }
+        public ActionResult ListaPedidos(DateTime? inicio, DateTime? fin)
+        {
+            //obtiene toda la lista de ordenes de entrada
+            var ordenes = bd.Pedido.ToList();
+            if (inicio != null)
+            {
+                //select * from OrdenEntrada o WHERE o.fecha >= inicio AND o.fecha<=fin
+                ordenes = ordenes.Where(o => o.Fecha >= inicio && o.Fecha <= fin).ToList();
+            }
+            return PartialView("_ListaPedidos",ordenes);
         }
     }
 }

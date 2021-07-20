@@ -10,31 +10,12 @@ namespace Pagina_de_Pedidos.Controllers
     public class DetalleController : Controller
     {
         private PaginaPedidoEntities bd = new PaginaPedidoEntities();
-
-        //MANTENEDOR CREAR
-        public ActionResult Crear()
-        {
-            ViewBag.Id_producto = new SelectList(bd.Producto, "Id_producto", "Nombre");
-            ViewBag.Id_pedido = new SelectList(bd.Pedido, "Id_pedido", "Id_pedido");
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Crear(Detalle detalle)
-        {
-            bd.Detalle.Add(detalle);
-            bd.SaveChanges();
-            ViewBag.Id_producto = new SelectList(bd.Producto, "Id_producto", "Nombre");
-            ViewBag.Id_pedido = new SelectList(bd.Pedido, "Id_pedido", "Id_pedido");
-
-            return RedirectToAction("Index");
-        }
         //LISTADO
         public ActionResult Index()
         {
             var detalle = bd.Detalle.ToList();
             return View(detalle);
         }
-
         //MANTENEDOR EDITAR
         public ActionResult Editar(int? id)
         {
@@ -62,10 +43,8 @@ namespace Pagina_de_Pedidos.Controllers
         {
             bd.Entry(detalle).State = System.Data.EntityState.Modified;
             bd.SaveChanges();
-
             return RedirectToAction("Index");
         }
-
         //MANTENEDOR ELIMINAR
         public ActionResult Eliminar(int? id)
         {
@@ -89,7 +68,6 @@ namespace Pagina_de_Pedidos.Controllers
                 bd.SaveChanges();
             }
             return RedirectToAction("Index");
-
         }
     }
 }

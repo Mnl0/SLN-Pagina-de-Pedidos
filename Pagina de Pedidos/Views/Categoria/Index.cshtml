@@ -3,7 +3,6 @@
     ViewBag.Title = "Index";
 }
 <h2 class="text-center py-3">Lista de Categorias</h2>
-
 <div class="card mb-4">
     <div class="card-header">
         <i class="">Datos de categoría</i>
@@ -12,7 +11,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th hidden>Id</th>
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th></th>
@@ -22,7 +21,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.Id_categoria</td>
+                        <td hidden>@item.Id_categoria</td>
                         <td>@item.Nombre</td>
                         <td>@item.Descripcion</td>
                         <td class="text-end">

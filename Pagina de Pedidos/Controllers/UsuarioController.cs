@@ -10,14 +10,11 @@ namespace Pagina_de_Pedidos.Controllers
     public class UsuarioController : Controller
     {
         private PaginaPedidoEntities bd = new PaginaPedidoEntities();
-
-        //LOGIN
         public ActionResult Login()
         {
             return View();
         }
         [HttpPost]
-        //validar que los atributos del usuario sean unicos
         public ActionResult Login(string email, string contrasena)
         {
             var uss = bd.Usuario.FirstOrDefault(u => u.email == email && u.contrasena == contrasena);
@@ -26,7 +23,7 @@ namespace Pagina_de_Pedidos.Controllers
                 Session["Nombre"] = uss.nombre + " " + uss.email;
                 Session["iduss"] = uss.id_usuario;
                 Session["tipoUss"] = uss.id_tipousuario;
-                return RedirectToAction("Index", "Inicio");
+                return RedirectToAction("Index", "Pedido");
             }
             return View();
         }
@@ -51,7 +48,6 @@ namespace Pagina_de_Pedidos.Controllers
             ViewBag.id_tipoUsuario = new SelectList(bd.TipoUsuario, "id_tipoUsuario", "nombre");
             return View();
         }
-        //LISTADO
         public ActionResult Index()
         {
             var usuario = bd.Usuario.ToList();
@@ -82,7 +78,6 @@ namespace Pagina_de_Pedidos.Controllers
         {
             bd.Entry(usuario).State = System.Data.EntityState.Modified;
             bd.SaveChanges();
-
             return RedirectToAction("Index");
         }
         //MANTENEDOR ELIMINAR
@@ -109,8 +104,6 @@ namespace Pagina_de_Pedidos.Controllers
             }
             return RedirectToAction("Index");
         }
-
-        //OK
         [HttpPost]
         public ActionResult RutExiste(string existe)
         {

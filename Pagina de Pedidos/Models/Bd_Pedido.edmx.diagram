@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="310154e661b84979843fec96527768aa" Name="Diagram1">
-        <EntityTypeShape EntityType="PaginaPedidoModel.Categoria" Width="1.5" PointX="3" PointY="8.5" />
-        <EntityTypeShape EntityType="PaginaPedidoModel.Cliente" Width="1.5" PointX="3" PointY="5.375" />
+        <EntityTypeShape EntityType="PaginaPedidoModel.Categoria" Width="1.5" PointX="3" PointY="8.375" />
+        <EntityTypeShape EntityType="PaginaPedidoModel.Cliente" Width="1.5" PointX="3" PointY="5.25" />
         <EntityTypeShape EntityType="PaginaPedidoModel.Detalle" Width="1.5" PointX="7.5" PointY="1" />
         <EntityTypeShape EntityType="PaginaPedidoModel.Pedido" Width="1.5" PointX="5.25" PointY="1" />
-        <EntityTypeShape EntityType="PaginaPedidoModel.Producto" Width="1.5" PointX="5.25" PointY="8.125" />
-        <EntityTypeShape EntityType="PaginaPedidoModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="PaginaPedidoModel.Producto" Width="1.5" PointX="5.25" PointY="8" />
+        <EntityTypeShape EntityType="PaginaPedidoModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="1.375" />
         <EntityTypeShape EntityType="PaginaPedidoModel.Usuario" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="PaginaPedidoModel.FK_Producto_Categoria" />
         <AssociationConnector Association="PaginaPedidoModel.FK_Pedido_Cliente" />

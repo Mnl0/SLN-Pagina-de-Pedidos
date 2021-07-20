@@ -1,69 +1,283 @@
-﻿@model IEnumerable<Pagina_de_Pedidos.Models.Pedido>
+﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Crear Pedido";
 }
-@*<div class="card mb-4 mb-5 pb-3">
-    <div class="card-header">
-        <i class="">Datos de productos</i>
-    </div>
-    <div class="card-body">
-        <div class="form-group row">
-            <label class="col-1">Producto</label>
-            <div class="col-2">
-                @Html.DropDownList("categoria", null, "Todos", htmlAttributes: new { @class = "form-control" })
-            </div>
-            <div class="col-3">
-                <button class="btn btn-success" id="buscar">Buscar</button>
-            </div>
-        </div>
-        <div class="">
-            <a class="btn btn-success" href="/Producto/Crear/">Crear Producto</a>
-        </div>
-    </div>
-    <div class="card-footer">
-        <div class="table-responsive" id="tablaCategoria">
-        </div>
-    </div>
-</div>*@
-
-
-
-
-<h2 class="text-center py-3">Lista de Pedidos</h2>
-
+<div class="text-center">
+    <h2 class="py-3">Crear Pedido</h2>
+</div>
 <div class="card mb-4">
-    <div class="card-header">
-        <i class="">Datos de Pedidos</i>
-    </div>
+    <div class="card-header">Ingrese los productos al pedido</div>
     <div class="card-body">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Id pedido</th>
-                    <th>Id cliente</th>
-                    <th>fecha</th>
-                    <th>precio total</th>
-                    <th>numero pedido</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.Id_pedido</td>
-                        <td>@item.Id_cliente</td>
-                        <td>@item.Fecha.ToShortDateString()</td>
-                        <td>@item.Precio_total</td>
-                        <td>@item.Numero_pedido</td>
-                        <td class="text-end">
-                            <a href="/Pedido/Editar/@item.Id_pedido" class="btn btn-warning">Editar</a>
-                            <a href="/Pedido/Eliminar/@item.Id_pedido" class="btn btn-danger">Eliminar</a>
-                        </td>
+        <div class="form-group row d-flex align-items-end">
+            <div class="col-sm-3 d-flex">
+                <div class="row">
+                    <label class="d-flex align-items-center col-5">Cliente</label>
+                    <a href="/Cliente/Crear" class="btn btn btn-primary col-5">Agregar cliente</a>
+                    @Html.DropDownList("Id_cliente", null, "Seleccione cliente", htmlAttributes: new { @class = "form-control m-2 col-5" })
+                </div>
+            </div>
+            <div class="col-sm-3 d-flex">
+                <div class="row">
+                    <label class="d-flex align-items-center col-5">Producto</label>
+                    @Html.DropDownList("Id_producto", null, "Seleccione producto", htmlAttributes: new { @class = "form-control m-2 col-5" })
+                </div>
+            </div>
+            <div class="col-sm-3 d-flex">
+                <div class="row">
+                    <label class="d-flex align-items-center col-5">Precio</label>
+                    <input type="text" id="precio" class="form-control m-2" disabled />
+                </div>
+            </div>
+            <div class="col-sm-2 d-flex">
+                <div class="row">
+                    <label class="d-flex align-items-center col-5">Cantidad</label>
+                    <input type="number" id="cantidad" class="form-control solonumeros m-2" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group row d-flex align-items-end mt-2">
+            @*<div class="col-sm-3 d-flex">
+                <div class="row">
+                    <label class="d-flex align-items-center col-5">N° Pedido</label>
+                    <input type="text" id="numPedido" class="form-control m-2 col-5" disabled />
+                </div>
+            </div>*@
+            <div class="col-sm-3 d-flex">
+                <div class="row">
+                    <label class="d-flex align-items-center col-5">Fecha</label>
+                    <input type="text" id="fecha" value="@DateTime.Now.ToShortDateString()" class="form-control m-2" disabled />
+                </div>
+            </div>
+            <div class="col-sm-3 d-flex">
+                <div class="row">
+                    <label class="d-flex align-items-center col-5">Precio Total</label>
+                    <input type="text" id="precioTotal" class="form-control m-2" disabled />
+                </div>
+            </div>
+            <div class="col-sm-2 d-flex align-items-sm-start">
+                <button class="btn btn-success m-2" id="agregar">Agregar</button>
+            </div>
+        </div>
+        <div id="contenedorTabla" class="tabla-responsive" hidden>
+            <hr />
+            <table class="table table-striped " id="tablaProductos">
+                <thead>
+                    <tr class="bg-success text-white">
+                        <th>Producto</th>
+                        <th>precio</th>
+                        <th>Cantidad</th>
+                        <th>Precio Total</th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
-        <a class="btn btn-success" href="/Pedido/Crear/">Crear nuevo pedido</a>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+            <button class="btn btn-primary" id="guardar">GUARDAR</button>
+        </div>
     </div>
 </div>
+<script src="~/Scripts/swal.min.js"></script>
+<script>
+    //variables
+    let producto = [];//arreglo permite guardar todos los productos a ingresar
+    let precioTotalPedido = 0;
+    $('#Id_cliente').change(function () {
+        seleccionarCliente();
+    });
+    //agregar producto
+    $('#agregar').click(function () {
+        let error = '';
+        if (!$('#Id_cliente').val()) {
+            error = 'Debe seleccionar un cliente \n';
+        }
+        if (!$('#Id_producto').val()) {
+            error += 'Debe seleccionar un producto \n';
+        }
+        if (!$('#cantidad').val()) {
+            error += 'Debe ingresar cantidad del producto';
+        }
+        if (error != '') {
+            swal('Error Validación', error, 'error');
+        }
+        else {
+            var selectProducto = document.getElementById("Id_producto");
+            var productoSeleccionado = selectProducto.options[selectProducto.selectedIndex].text;
+            var selectCliente = document.getElementById("Id_cliente");
+            var clienteSeleccionado = selectCliente.options[selectCliente.selectedIndex].text;
+            const datos = {
+                cliente:clienteSeleccionado,
+                Id_producto: $('#Id_producto').val(),
+                precio: $('#precio').val(),
+                cantidad: $('#cantidad').val(),
+                nombre: productoSeleccionado,
+                PrecioTotal: $('#precio').val() * $('#cantidad').val(),
+
+            };
+            //verficia si el producto existe en el arreglo
+            let x = 0;//variable para verificar si el producto esta o no  (0: producto no existe en el arreglo, 1: producto existe)
+            if (producto.length > 0) {
+                for (let i = 0; i < producto.length; i++) {
+                    if (producto[i].Id_producto == $('#Id_producto').val()) {
+                        producto[i].cantidad = datos.cantidad;
+                        producto[i].nombre = datos.nombre;
+                        producto[i].precio = datos.precio;
+                        producto[i].PrecioTotal = datos.PrecioTotal;
+                        x = 1;
+                        break;//cortar el ciclo for
+                    }
+                }
+                if (x == 0) {
+                    producto.push(datos);
+                }
+            }
+            else {
+                producto.push(datos);
+            }
+            limpiar();
+            if (producto.length > 0) {
+                $('#contenedorTabla').removeAttr('hidden', true);//removeAttr permite quitar un atributo a una etiqueta html
+                cargarTabla();
+                totalPedido();
+                seleccionarCliente();
+            }
+        }
+    });
+    function cargarTabla() {
+        $('#tablaProductos tbody').empty();//limpiar la tabla antes de agregar
+        for (let i = 0; i < producto.length; i++) {
+            fila = '<tr>';
+            fila += '<td>' + producto[i].nombre + '</td>';
+            fila += '<td>' + producto[i].precio + '</td>';
+            fila += '<td>' + producto[i].cantidad + '<DateTimeateTimetd>';
+            fila += '<td>' + producto[i].PrecioTotal + '</td>';
+            fila += "<td><button class='btn btn-danger'><span class='fa fa-trash'></span></button></td>";
+            fila += '</tr>';
+            $('#tablaProductos tbody').append(fila);//permite insertar la fila que creamos en el body de la tabla
+            eliminar();
+        }
+    }
+    function limpiar() {
+        idProducto = 0;
+        $('#Id_producto').val('');
+        $('#precio').val('');
+        $('#cantidad').val('');
+        $('#precio').val('');
+        $('#precioTotal').val('');
+    }
+    //elimina elementos de la tabla temporal
+    function eliminar() {
+        $('.btn-danger').click(function () {
+            //obtener el código de la fila seleccionada al presionar el botón de basurero
+            //let codigo = $(this).parents('tr').find('td').eq(0).html();
+            let codigo = $(this).parents('tr').find('td').eq(0).html();
+            //for para recorrer el arreglo de productos
+            for (let i = 0; i < producto.length; i++) {
+                //verifica si encuentra el código en el arreglo
+                if (producto[i].nombre == codigo) {
+                    //splice sirve para eleminar o sacar datos del arreglo(producto)
+                    producto.splice(i, 1);
+                }
+            }
+            //se vuelve a cargar la tabla con los productos del arreglo
+            cargarTabla();
+            if (producto.length == 0) {
+                $('#contenedorTabla').attr('hidden', true);//attr permite agregar una atributo a una etiqueta html
+            }
+        });
+    }
+//Script para aceptar sólo números
+    $('.solonumeros').on('input', function () {
+        this.value = this.value.replace(/[^1-9]/g, '');
+    });
+//Script para traer el precio del producto
+    $('#Id_producto').change(function () {
+        if ($('#Id_producto').val() != '') {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("buscarPrecio")',
+                data: '{id:' + JSON.stringify($('#Id_producto').val()) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    if (result != '') {
+                        $('#precio').val(result);
+                    }
+                }
+            });
+        }
+    });
+//Calcula Precio Total
+    $('#cantidad').change(function () {
+        $('#precioTotal').val($('#cantidad').val() * $('#precio').val());
+    });
+//guardar datos
+    $('#guardar').click(function () {
+        let error = '';
+        if (producto.length == 0) {
+            error += 'Debe ingresar al menos un producto';
+        }
+        if (error != '') {
+            swal('Error validación', error, 'error');
+        } else {
+            const Pedido = {
+                Id_cliente: $('#Id_cliente').val(),
+                Precio_total: precioTotalPedido,
+                Cantidad: $('#cantidad').val()
+            }
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GuardarPedido")',
+                data: '{Pedido:' + JSON.stringify(Pedido) + ',detalle:' + JSON.stringify(producto) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    if (result == '') {
+                        //mustra mensaje y recarga la vista
+                        swal({
+                            title: 'Guardado con éxito!!!',
+                            text: 'Los datos se han guardado',
+                            icon: 'success',
+                            button: 'Confirmar',
+                            closeOnClickOutside: true
+                        }).then(function (isConfirm) {
+                            if (isConfirm) {
+                                location.reload();
+                            }
+                        });
+                    }
+                }
+            })
+        }
+    });
+
+    //Script para traer el cliente
+    function seleccionarCliente() {
+        if ($('#Id_cliente').val() != '') {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("buscarCliente")',
+                data: '{id:' + JSON.stringify($('#Id_cliente').val()) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    if (result != '') {
+                        $('#tablaProductos tfoot').empty();
+                        $('#tablaProductos tfoot').append('<tr><td>Cliente: ' + result.Nombre + '</td><td>Dirección: ' + result.Direccion + '</td><td>Fono: ' + result.Telefono + '</td><td>Fecha: ' + $('#fecha').val() + '</td><td>Precio Total Pedido: <b>' + precioTotalPedido +'<b> </td></tr>');
+                    }
+                }
+            });
+        }
+    }
+    //$('#Id_cliente').change(function () {
+    //    seleccionarCliente();
+    //});
+    //Calcular precio total del pedido
+    function totalPedido() {
+        precioTotalPedido = 0;
+        for (var i = 0; i < producto.length; i++) {
+            precioTotalPedido += producto[i].PrecioTotal;
+        }
+    }
+</script>

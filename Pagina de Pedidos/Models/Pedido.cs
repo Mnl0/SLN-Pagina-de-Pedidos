@@ -23,7 +23,6 @@ namespace Pagina_de_Pedidos.Models
         public int Id_cliente { get; set; }
         public System.DateTime Fecha { get; set; }
         public int Precio_total { get; set; }
-        public int Numero_pedido { get; set; }
         public int id_usuario { get; set; }
     
         public virtual Cliente Cliente { get; set; }
