@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="310154e661b84979843fec96527768aa" Name="Diagram1">
+      <Diagram DiagramId="310154e661b84979843fec96527768aa" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="PaginaPedidoModel.Categoria" Width="1.5" PointX="3" PointY="8.375" />
         <EntityTypeShape EntityType="PaginaPedidoModel.Cliente" Width="1.5" PointX="3" PointY="5.25" />
         <EntityTypeShape EntityType="PaginaPedidoModel.Detalle" Width="1.5" PointX="7.5" PointY="1" />

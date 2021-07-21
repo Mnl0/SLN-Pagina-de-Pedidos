@@ -20,7 +20,7 @@ namespace Pagina_de_Pedidos.Controllers
             var uss = bd.Usuario.FirstOrDefault(u => u.email == email && u.contrasena == contrasena);
             if (uss != null)
             {
-                Session["Nombre"] = uss.nombre + " " + uss.email;
+                Session["Nombre"] = uss.nombre + " - " + uss.email;
                 Session["iduss"] = uss.id_usuario;
                 Session["tipoUss"] = uss.id_tipousuario;
                 return RedirectToAction("Index", "Pedido");

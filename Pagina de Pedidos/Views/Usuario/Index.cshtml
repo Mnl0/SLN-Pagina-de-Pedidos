@@ -12,7 +12,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th hidden>Id</th>
                     <th>Nombre</th>
                     <th>Rut</th>
                     <th>Email</th>
@@ -25,7 +25,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.id_usuario</td>
+                        <td hidden>@item.id_usuario</td>
                         <td>@item.nombre</td>
                         <td>@item.rut</td>
                         <td>@item.email</td>

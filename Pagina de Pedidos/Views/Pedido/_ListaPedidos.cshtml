@@ -5,6 +5,7 @@
             <th>Número Pedido</th>
             <th>Nombre Cliente</th>
             <th>Fecha Ingreso</th>
+            <th>Total compra</th>
             <th>Usuario Ingreso</th>
             <th></th>
         </tr>
@@ -13,11 +14,11 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Id_pedido.Detalle</td>
+                <td>@item.Id_pedido</td>
                 <td>@item.Cliente.Nombre</td>
                 <td>@item.Fecha.ToShortDateString()</td>
+                <td>@item.Precio_total</td>
                 <td>@item.Usuario.nombre</td>
-
                 <td></td>
             </tr>
         }

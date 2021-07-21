@@ -39,6 +39,8 @@
         </div>
     </form>
 </div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/Scripts/sweetalert.min.js"></script>
 <script>
     $('#btnEditar').click(function (e) {
         let error = '';
@@ -52,6 +54,11 @@
             swal('Verificar Datos Ingresados!!!', error, 'error');
             e.preventDefault();
         }
+        else {
+            alert("Se ha editado con exito");
+        }
+        
     });
+
 </script>
 

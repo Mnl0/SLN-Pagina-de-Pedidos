@@ -15,8 +15,8 @@ namespace Pagina_de_Pedidos.Models
     public partial class Detalle
     {
         public int Id_detalle { get; set; }
-        public int Cantidad { get; set; }
         public int Id_producto { get; set; }
+        public int Cantidad { get; set; }
         public int Id_pedido { get; set; }
         public int Precio { get; set; }
     

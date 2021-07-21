@@ -8,16 +8,16 @@
         <i class="">Datos de productos</i>
     </div>
     <div class="card-body">
-        <div class="form-group row">
-            <label class="col-1">Producto</label>
-            <div class="col-2">
+        <div class="form-group row align-items-center">
+            <label class="col-4 text-end">Producto</label>
+            <div class="col-4">
                 @Html.DropDownList("categoria", null, "Todos", htmlAttributes: new { @class = "form-control" })
             </div>
             <div class="col-3">
                 <button class="btn btn-success" id="buscar">Buscar</button>
             </div>
         </div>
-        <div class="">
+        <div class="form-group mt-5">
             <a class="btn btn-success" href="/Producto/Crear/">Crear Producto</a>
         </div>
     </div>

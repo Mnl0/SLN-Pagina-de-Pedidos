@@ -6,15 +6,16 @@
     <title>@ViewBag.Title - Pagina de Pedidos</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @*<link href="~/Content/login.css" rel="stylesheet" />*@
-    <link href="~/Content/estilos.css" rel="stylesheet"/>
+    <link href="~/Content/estilos.css" rel="stylesheet" />
 </head>
 <body>
     @if (Session["iduss"] != null)
     {
     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
         <div class="container-fluid header">
-            <a class="navbar-brand" href="/Pedido/Index/"><i class="fas fa-hotdog"></i> Pedidos Ñam</a>
+            <a class="navbar-brand pr-3" style="margin-right: 5rem;" href="/Pedido/Index/"><i class="fas fa-hotdog"></i> Pedidos Ñam</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,13 +32,17 @@
 
                         @Html.Partial("_menuVendedor");
                     }
-                    <li class="nav-item li">
-                        <a class="nav-link active">@Session["Nombre"]</a>
-                    </li>
-                    <li class="nav-item li">
-                        <a class="nav-link active" href="@Url.Action("Logout","Usuario")">Salir</a>
-                    </li>
                 </ul>
+                <div >
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item li">
+                            <a class="nav-link active">@Session["Nombre"]</a>
+                        </li>
+                        <li class="nav-item li">
+                            <a class="nav-link active" href="@Url.Action("Logout","Usuario")">Salir <i class="fa fa-power-off" aria-hidden="true"></i></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>

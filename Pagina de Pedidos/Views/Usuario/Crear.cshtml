@@ -21,13 +21,13 @@
         <div class="form-group row align-items-center">
             <label class="col-3 text-end">Rut: </label>
             <div class="col-6">
-                <input class="form-control m-2" type="text" name="rut" id="rut" />
+                <input class="form-control m-2 solonumeros" type="text" name="rut" id="rut" oninput="checkRut(this)" maxlength="10"/>
             </div>
         </div>
         <div class="form-group row align-items-center">
             <label class="col-3 text-end">Email:</label>
             <div class="col-6">
-                <input class="form-control m-2" type="text" name="email" id="email" />
+                <input class="form-control m-2" type="email" name="email" id="email" />
             </div>
         </div>
         <div class="form-group row align-items-center">
@@ -42,26 +42,39 @@
         </div>
     </form>
 </div>
+<script src="~/Scripts/rut.js"></script>
 <script src="~/Scripts/swal.min.js"></script>
 <script>
     $('#btnEnviar').click(function (e) {
         let error = '';
-        if ($('#nombre').val().trim() == '') {
-            error = 'Debe ingresar nombre del cliente \n';
+        let com = '.com';
+        if (!$('#id_tipoUsuario').val()) {
+            error = 'Debe seleccionar un Tipo Usuario\n';
         }
-        if ($('#telefono').val().trim() == ''){
-            error += 'Debe ingresar un telefono del cliente \n';
+        if ($('#nombre').val().trim() == ''){
+            error += 'Debe ingresar un nombre\n';
         }
-        if ($('#telefono').val().length != 9) {
-            error += 'El teléfono debe tener 9 dígitos \n';
+        if ($('#rut').val().length > 10 || $('#rut').val().length < 9) {
+            error += 'Verificar rut \n';
         }
-        if ($('#direccion').val().trim() == '') {
-            error += 'Debe ingresar una direccion del cliente \n';
+        if ($('#email').val().trim() == '') {
+            error += 'Debe ingresar un email\n';
+        }
+        if (!$('#email').val().includes(com)) {
+            error += 'Debe ingrear correo valido [.com]  \n';
+        }
+        // $(":contains(text)")
+        if ($('#contrasena').val().trim() == '') {
+            error += 'Debe ingresar una contrasena \n';
         }
         if (error != '') {
             swal('Verificar Datos Ingresados!!!', error, 'error');
             e.preventDefault();
         }
+    });
+    //Script para aceptar sólo números
+    $('.solonumeros').on('input', function () {
+        this.value = this.value.replace(/[^0-9-k]/g, '');
     });
     $('#rut').blur(function () {
         if ($('#rut').val().trim() != '') {
@@ -97,5 +110,6 @@
                 }
             });
         }
-    });
+        });
+
 </script>

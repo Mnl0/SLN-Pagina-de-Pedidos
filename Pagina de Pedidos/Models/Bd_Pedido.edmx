@@ -27,8 +27,8 @@
             <PropertyRef Name="Id_detalle" />
           </Key>
           <Property Name="Id_detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Cantidad" Type="int" Nullable="false" />
           <Property Name="Id_producto" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
           <Property Name="Id_pedido" Type="int" Nullable="false" />
           <Property Name="Precio" Type="int" Nullable="false" />
         </EntityType>
@@ -236,8 +236,8 @@
             <PropertyRef Name="Id_detalle" />
           </Key>
           <Property Name="Id_detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <Property Name="Id_producto" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <Property Name="Id_pedido" Type="Int32" Nullable="false" />
           <Property Name="Precio" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Pedido" Relationship="PaginaPedidoModel.FK_Detalle_Pedido" FromRole="Detalle" ToRole="Pedido" />
@@ -391,8 +391,8 @@
               <MappingFragment StoreEntitySet="Detalle">
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
                 <ScalarProperty Name="Id_pedido" ColumnName="Id_pedido" />
-                <ScalarProperty Name="Id_producto" ColumnName="Id_producto" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Id_producto" ColumnName="Id_producto" />
                 <ScalarProperty Name="Id_detalle" ColumnName="Id_detalle" />
               </MappingFragment>
             </EntityTypeMapping>
